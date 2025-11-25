@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Where to Stay · Florianópolis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="ocean-bg"></div>
+    <div class="waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <canvas id="confetti"></canvas>
+
+    <div class="container">
+        <div class="map-scroll">
+            <a href="index.html" class="home-link">Floripa</a>
+            <div class="compass"></div>
+
+            <!-- Intro Screen -->
+            <div id="intro-screen" class="screen intro-screen">
+                <div class="intro-icon">🏡</div>
+                <h1>Where to Stay</h1>
+                <p class="subtitle">Find Your Floripa Base</p>
+                <p class="intro-text">
+                    From luxury beach clubs to bohemian surf villages, each neighborhood offers a different Floripa experience.
+                    Answer four questions and we'll match you with your perfect base.
+                </p>
+                <button class="start-btn" onclick="startQuiz()">
+                    FIND YOUR NEIGHBORHOOD
+                </button>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quiz-screen" class="screen hidden">
+                <h1>Where to Stay</h1>
+                <p class="subtitle">Chart your base</p>
+
+                <div class="journey-progress">
+                    <div class="journey-step" data-step="1"><span>1</span></div>
+                    <div class="journey-connector"></div>
+                    <div class="journey-step" data-step="2"><span>2</span></div>
+                    <div class="journey-connector"></div>
+                    <div class="journey-step" data-step="3"><span>3</span></div>
+                    <div class="journey-connector"></div>
+                    <div class="journey-step" data-step="4"><span>4</span></div>
+                </div>
+
+                <div id="question-area" class="question-container">
+                    <!-- Questions loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen" class="screen result-screen">
+                <div class="discovery-label">YOUR PERFECT BASE</div>
+                <h2 id="result-name" class="result-name stamp-effect"></h2>
+                <p id="result-nickname" class="result-nickname"></p>
+                <p id="result-type" class="result-type"></p>
+
+                <div id="result-card" class="result-card">
+                    <!-- Result details loaded dynamically -->
+                </div>
+
+                <div id="personality-badge" class="personality-badge"></div>
+
+                <div class="result-actions">
+                    <button class="restart-btn" onclick="restartQuiz()">
+                        Explore Other Neighborhoods →
+                    </button>
+                    <a href="find-your-beach.html" class="restart-btn">
+                        Find Your Beach →
+                    </a>
+                    <a href="hidden-gems.html" class="restart-btn">
+                        Discover Hidden Gems →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/neighborhoods.js"></script>
+    <script>
+        let currentQuestion = 0;
+        let answers = {};
+
+        function startQuiz() {
+            const intro = document.getElementById('intro-screen');
+            const quiz = document.getElementById('quiz-screen');
+
+            intro.classList.add('exit');
+            setTimeout(() => {
+                intro.classList.add('hidden');
+                quiz.classList.remove('hidden');
+                showQuestion(0);
+            }, 500);
+        }
+
+        function showQuestion(index) {
+            const questionArea = document.getElementById('question-area');
+            const q = neighborhoodQuestions[index];
+
+            document.querySelectorAll('.journey-step').forEach((step, i) => {
+                step.classList.remove('active', 'completed');
+                if (i < index) step.classList.add('completed');
+                if (i === index) step.classList.add('active');
+            });
+
+            questionArea.classList.remove('visible');
+
+            setTimeout(() => {
+                questionArea.innerHTML = `
+                    <div class="question-label">${q.label}</div>
+                    <div class="question-text">${q.text}</div>
+                    <div class="options-grid">
+                        ${q.options.map(opt => `
+                            <div class="option-card" onclick="selectOption('${opt.value}', this)">
+                                <div class="option-icon">${opt.icon}</div>
+                                <div class="option-content">
+                                    <div class="option-title">${opt.title}</div>
+                                    <div class="option-desc">${opt.desc}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                requestAnimationFrame(() => {
+                    questionArea.classList.add('visible');
+                });
+            }, 300);
+        }
+
+        function selectOption(value, element) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.width = ripple.style.height = '50px';
+            ripple.style.left = '25px';
+            ripple.style.top = '50%';
+            ripple.style.marginTop = '-25px';
+            element.appendChild(ripple);
+
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const questionKeys = ['tripType', 'budget', 'scene', 'priority'];
+            answers[questionKeys[currentQuestion]] = value;
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < neighborhoodQuestions.length) {
+                    showQuestion(currentQuestion);
+                } else {
+                    showResult();
+                }
+            }, 600);
+        }
+
+        function showResult() {
+            const quiz = document.getElementById('quiz-screen');
+            const result = document.getElementById('result-screen');
+            const match = calculateNeighborhoodMatch(answers);
+            const n = match.best;
+
+            quiz.classList.add('exit');
+
+            setTimeout(() => {
+                quiz.classList.add('hidden');
+
+                document.getElementById('result-name').textContent = n.name;
+                document.getElementById('result-nickname').textContent = n.nickname ? `"${n.nickname}"` : '';
+                document.getElementById('result-type').textContent = n.type;
+
+                const resultCard = document.getElementById('result-card');
+                resultCard.innerHTML = `
+                    <div class="result-header">
+                        <span class="result-emoji">${n.emoji}</span>
+                        <div>
+                            <span class="result-region">${n.region}</span>
+                        </div>
+                    </div>
+
+                    <p class="result-description">${n.description}</p>
+
+                    <div class="fit-section-grid">
+                        <div class="fit-section best">
+                            <div class="fit-title">✓ BEST FOR</div>
+                            <div class="fit-list">${n.bestFor}</div>
+                        </div>
+                        <div class="fit-section not-ideal">
+                            <div class="fit-title">✗ NOT IDEAL FOR</div>
+                            <div class="fit-list">${n.notIdealFor}</div>
+                        </div>
+                    </div>
+
+                    <div class="price-section">
+                        <div class="price-title">💰 ACCOMMODATION PRICES</div>
+                        <div class="price-grid">
+                            <div class="price-item">
+                                <div class="price-item-label">Short-term (Low)</div>
+                                <div class="price-item-value">${n.shortTermLow}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-item-label">Short-term (High)</div>
+                                <div class="price-item-value">${n.shortTermHigh}</div>
+                            </div>
+                            <div class="price-item">
+                                <div class="price-item-label">Long-term Monthly</div>
+                                <div class="price-item-value">${n.longTerm}</div>
+                            </div>
+                            ${n.coworking ? `
+                            <div class="price-item">
+                                <div class="price-item-label">Coworking</div>
+                                <div class="price-item-value" style="font-size: 0.8rem;">${n.coworking}</div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <div class="beaches-section">
+                        <div class="beaches-title">🏖️ NEARBY BEACHES</div>
+                        <div class="beaches-list">
+                            ${n.nearbyBeaches.map(b => `<span class="beach-pill">${b}</span>`).join('')}
+                        </div>
+                    </div>
+
+                    ${n.proTip ? `
+                    <div class="pro-tip">
+                        <div class="pro-tip-label">💡 PRO TIP</div>
+                        <div class="pro-tip-text">${n.proTip}</div>
+                    </div>
+                    ` : ''}
+
+                    <div class="alternatives-section">
+                        <div class="alternatives-title">ALSO CONSIDER</div>
+                        <div class="alternatives-grid">
+                            ${match.alternatives.map(alt => `
+                                <div class="alternative-card" onclick="showAlternative('${alt.name}')">
+                                    <div class="alternative-name">${alt.emoji} ${alt.name}</div>
+                                    <div class="alternative-type">${alt.type}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                    <div class="result-tags">
+                        ${n.tags.map(tag => `<span class="result-tag">#${tag}</span>`).join('')}
+                    </div>
+                `;
+
+                document.getElementById('personality-badge').textContent = `You're a ${n.personality}`;
+
+                result.classList.remove('hidden');
+                result.classList.add('visible');
+
+                launchConfetti();
+            }, 500);
+        }
+
+        function showAlternative(name) {
+            const n = neighborhoods.find(nb => nb.name === name);
+            if (!n) return;
+
+            document.getElementById('result-name').textContent = n.name;
+            document.getElementById('result-nickname').textContent = n.nickname ? `"${n.nickname}"` : '';
+            document.getElementById('result-type').textContent = n.type;
+
+            const resultCard = document.getElementById('result-card');
+            resultCard.innerHTML = `
+                <div class="result-header">
+                    <span class="result-emoji">${n.emoji}</span>
+                    <div>
+                        <span class="result-region">${n.region}</span>
+                    </div>
+                </div>
+
+                <p class="result-description">${n.description}</p>
+
+                <div class="fit-section-grid">
+                    <div class="fit-section best">
+                        <div class="fit-title">✓ BEST FOR</div>
+                        <div class="fit-list">${n.bestFor}</div>
+                    </div>
+                    <div class="fit-section not-ideal">
+                        <div class="fit-title">✗ NOT IDEAL FOR</div>
+                        <div class="fit-list">${n.notIdealFor}</div>
+                    </div>
+                </div>
+
+                <div class="price-section">
+                    <div class="price-title">💰 ACCOMMODATION PRICES</div>
+                    <div class="price-grid">
+                        <div class="price-item">
+                            <div class="price-item-label">Short-term (Low)</div>
+                            <div class="price-item-value">${n.shortTermLow}</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="price-item-label">Short-term (High)</div>
+                            <div class="price-item-value">${n.shortTermHigh}</div>
+                        </div>
+                        <div class="price-item">
+                            <div class="price-item-label">Long-term Monthly</div>
+                            <div class="price-item-value">${n.longTerm}</div>
+                        </div>
+                        ${n.coworking ? `
+                        <div class="price-item">
+                            <div class="price-item-label">Coworking</div>
+                            <div class="price-item-value" style="font-size: 0.8rem;">${n.coworking}</div>
+                        </div>
+                        ` : ''}
+                    </div>
+                </div>
+
+                <div class="beaches-section">
+                    <div class="beaches-title">🏖️ NEARBY BEACHES</div>
+                    <div class="beaches-list">
+                        ${n.nearbyBeaches.map(b => `<span class="beach-pill">${b}</span>`).join('')}
+                    </div>
+                </div>
+
+                ${n.proTip ? `
+                <div class="pro-tip">
+                    <div class="pro-tip-label">💡 PRO TIP</div>
+                    <div class="pro-tip-text">${n.proTip}</div>
+                </div>
+                ` : ''}
+
+                <div class="result-tags">
+                    ${n.tags.map(tag => `<span class="result-tag">#${tag}</span>`).join('')}
+                </div>
+            `;
+
+            document.getElementById('personality-badge').textContent = `You're a ${n.personality}`;
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = {};
+
+            const result = document.getElementById('result-screen');
+            const intro = document.getElementById('intro-screen');
+
+            result.classList.remove('visible');
+            result.classList.add('exit');
+
+            setTimeout(() => {
+                result.classList.add('hidden');
+                result.classList.remove('exit');
+                intro.classList.remove('hidden', 'exit');
+            }, 500);
+        }
+
+        function launchConfetti() {
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const pieces = [];
+            const colors = ['#E85D4C', '#C9A227', '#7FB5A8', '#2D5A6B', '#F5F1E8'];
+
+            for (let i = 0; i < 100; i++) {
+                pieces.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: (Math.random() - 0.5) * 15,
+                    vy: (Math.random() - 0.5) * 15 - 5,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10
+                });
+            }
+
+            let frame = 0;
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                pieces.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.3;
+                    p.rotation += p.rotationSpeed;
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+                });
+
+                frame++;
+                if (frame < 120) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            animate();
+        }
+
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('confetti');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>

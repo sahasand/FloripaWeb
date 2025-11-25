@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Beach · Florianópolis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* Beach-specific styles */
+        .beach-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(1.8rem, 7vw, 3rem);
+            color: var(--coral);
+            letter-spacing: 0.1em;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+
+        .beach-nickname {
+            font-family: 'Crimson Text', serif;
+            font-style: italic;
+            font-size: 1rem;
+            color: var(--ocean-mid);
+            margin-bottom: 5px;
+            opacity: 0.8;
+        }
+
+        .beach-type {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--ocean-mid);
+            margin-bottom: 20px;
+        }
+
+        .beach-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .beach-emoji {
+            font-size: 3.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .beach-region {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            color: var(--gold);
+            background: rgba(201, 162, 39, 0.2);
+            padding: 4px 12px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .beach-description {
+            color: var(--foam);
+            font-size: 1.05rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .beach-fit {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .beach-tags {
+            display: flex;
+            gap: 8px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .beach-tag {
+            background: rgba(255,255,255,0.12);
+            color: var(--sand);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-family: 'Crimson Text', serif;
+        }
+
+        @media (max-width: 600px) {
+            .beach-fit {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="ocean-bg"></div>
+    <div class="waves">
+        <div class="wave"></div>
+        <div class="wave"></div>
+    </div>
+    <canvas id="confetti"></canvas>
+
+    <div class="container">
+        <div class="map-scroll">
+            <a href="index.html" class="home-link">Floripa</a>
+            <div class="compass"></div>
+
+            <!-- Intro Screen -->
+            <div id="intro-screen" class="screen intro-screen">
+                <div class="intro-icon">🏝️</div>
+                <h1>Find Your Beach</h1>
+                <p class="subtitle">A Florianópolis Discovery</p>
+                <p class="intro-text">
+                    The island holds 42 beaches, each with its own soul.
+                    Answer four questions and we'll chart your course to the shore that's calling your name.
+                </p>
+                <button class="start-btn" onclick="startQuiz()">
+                    BEGIN YOUR VOYAGE
+                </button>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quiz-screen" class="screen hidden">
+                <h1>Find Your Beach</h1>
+                <p class="subtitle">Chart your course</p>
+
+                <div class="journey-progress">
+                    <div class="journey-step" data-step="1"><span>1</span></div>
+                    <div class="journey-connector"></div>
+                    <div class="journey-step" data-step="2"><span>2</span></div>
+                    <div class="journey-connector"></div>
+                    <div class="journey-step" data-step="3"><span>3</span></div>
+                    <div class="journey-connector"></div>
+                    <div class="journey-step" data-step="4"><span>4</span></div>
+                </div>
+
+                <div id="question-area" class="question-container">
+                    <!-- Questions loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen" class="screen result-screen">
+                <div class="discovery-label">YOUR DISCOVERY</div>
+                <h2 id="beach-name" class="beach-name stamp-effect"></h2>
+                <p id="beach-nickname" class="beach-nickname"></p>
+                <p id="beach-type" class="beach-type"></p>
+
+                <div id="beach-card" class="result-card">
+                    <!-- Beach details loaded dynamically -->
+                </div>
+
+                <div id="personality-badge" class="personality-badge"></div>
+
+                <div class="result-actions">
+                    <button class="restart-btn" onclick="restartQuiz()">
+                        Discover Another Beach →
+                    </button>
+                    <a href="where-to-stay.html" class="restart-btn">
+                        Find Your Neighborhood →
+                    </a>
+                    <a href="hidden-gems.html" class="restart-btn">
+                        Discover Hidden Gems →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/beaches.js"></script>
+    <script>
+        let currentQuestion = 0;
+        let answers = {};
+
+        function startQuiz() {
+            const intro = document.getElementById('intro-screen');
+            const quiz = document.getElementById('quiz-screen');
+
+            intro.classList.add('exit');
+            setTimeout(() => {
+                intro.classList.add('hidden');
+                quiz.classList.remove('hidden');
+                showQuestion(0);
+            }, 500);
+        }
+
+        function showQuestion(index) {
+            const questionArea = document.getElementById('question-area');
+            const q = beachQuestions[index];
+
+            document.querySelectorAll('.journey-step').forEach((step, i) => {
+                step.classList.remove('active', 'completed');
+                if (i < index) step.classList.add('completed');
+                if (i === index) step.classList.add('active');
+            });
+
+            questionArea.classList.remove('visible');
+
+            setTimeout(() => {
+                questionArea.innerHTML = `
+                    <div class="question-label">${q.label}</div>
+                    <div class="question-text">${q.text}</div>
+                    <div class="options-grid">
+                        ${q.options.map(opt => `
+                            <div class="option-card" onclick="selectOption('${opt.value}', this)">
+                                <div class="option-icon">${opt.icon}</div>
+                                <div class="option-content">
+                                    <div class="option-title">${opt.title}</div>
+                                    <div class="option-desc">${opt.desc}</div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+
+                requestAnimationFrame(() => {
+                    questionArea.classList.add('visible');
+                });
+            }, 300);
+        }
+
+        function selectOption(value, element) {
+            const ripple = document.createElement('span');
+            ripple.classList.add('ripple');
+            ripple.style.width = ripple.style.height = '50px';
+            ripple.style.left = '25px';
+            ripple.style.top = '50%';
+            ripple.style.marginTop = '-25px';
+            element.appendChild(ripple);
+
+            document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected'));
+            element.classList.add('selected');
+
+            const questionKeys = ['vibe', 'effort', 'priority', 'practical'];
+            answers[questionKeys[currentQuestion]] = value;
+
+            setTimeout(() => {
+                currentQuestion++;
+                if (currentQuestion < beachQuestions.length) {
+                    showQuestion(currentQuestion);
+                } else {
+                    showResult();
+                }
+            }, 600);
+        }
+
+        function renderRatingDots(value, max = 5) {
+            let dots = '';
+            const fullDots = Math.floor(value);
+            for (let i = 0; i < max; i++) {
+                dots += `<span class="rating-dot ${i < fullDots ? 'filled' : ''}"></span>`;
+            }
+            return `<span class="rating-dots">${dots}</span>`;
+        }
+
+        function showResult() {
+            const quiz = document.getElementById('quiz-screen');
+            const result = document.getElementById('result-screen');
+            const beach = calculateBeachMatch(answers);
+
+            quiz.classList.add('exit');
+
+            setTimeout(() => {
+                quiz.classList.add('hidden');
+
+                document.getElementById('beach-name').textContent = beach.name;
+                document.getElementById('beach-nickname').textContent = beach.nickname ? `"${beach.nickname}"` : '';
+                document.getElementById('beach-type').textContent = beach.type;
+
+                const beachCard = document.getElementById('beach-card');
+                beachCard.innerHTML = `
+                    <div class="beach-header">
+                        <span class="beach-emoji">${beach.emoji}</span>
+                        <div>
+                            <span class="beach-region">${beach.region} Coast</span>
+                        </div>
+                    </div>
+
+                    <p class="beach-description">${beach.description}</p>
+
+                    <div class="ratings-grid">
+                        <div class="rating-item">
+                            <div class="rating-label">WAVES</div>
+                            <div class="rating-value">${renderRatingDots(beach.waves)}</div>
+                        </div>
+                        <div class="rating-item">
+                            <div class="rating-label">CROWDS</div>
+                            <div class="rating-value">${renderRatingDots(beach.crowds)}</div>
+                        </div>
+                        <div class="rating-item">
+                            <div class="rating-label">INFRASTRUCTURE</div>
+                            <div class="rating-value">${renderRatingDots(beach.infrastructure)}</div>
+                        </div>
+                        <div class="rating-item">
+                            <div class="rating-label">WATER</div>
+                            <div class="rating-value" style="font-size: 0.8rem;">${beach.water}</div>
+                        </div>
+                    </div>
+
+                    <div class="beach-fit">
+                        <div class="fit-section best">
+                            <div class="fit-title">✓ BEST FOR</div>
+                            <div class="fit-list">${beach.bestFor}</div>
+                        </div>
+                        <div class="fit-section not-ideal">
+                            <div class="fit-title">✗ NOT IDEAL FOR</div>
+                            <div class="fit-list">${beach.notIdealFor}</div>
+                        </div>
+                    </div>
+
+                    <div class="practical-section">
+                        <div class="practical-title">📍 PRACTICAL INFO</div>
+                        <div class="practical-grid">
+                            <div class="practical-item">
+                                <span class="practical-item-icon">🚗</span>
+                                <div class="practical-item-content">
+                                    <span class="practical-item-label">Parking</span>
+                                    ${beach.parking}
+                                </div>
+                            </div>
+                            <div class="practical-item">
+                                <span class="practical-item-icon">🍽️</span>
+                                <div class="practical-item-content">
+                                    <span class="practical-item-label">Food</span>
+                                    ${beach.food}
+                                </div>
+                            </div>
+                            <div class="practical-item">
+                                <span class="practical-item-icon">⏰</span>
+                                <div class="practical-item-content">
+                                    <span class="practical-item-label">Best Time</span>
+                                    ${beach.bestTime}
+                                </div>
+                            </div>
+                            <div class="practical-item">
+                                <span class="practical-item-icon">📅</span>
+                                <div class="practical-item-content">
+                                    <span class="practical-item-label">Best Season</span>
+                                    ${beach.bestSeason}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    ${beach.proTip ? `
+                    <div class="pro-tip">
+                        <div class="pro-tip-label">💡 PRO TIP</div>
+                        <div class="pro-tip-text">${beach.proTip}</div>
+                    </div>
+                    ` : ''}
+
+                    <div class="beach-tags">
+                        ${beach.tags.map(tag => `<span class="beach-tag">#${tag}</span>`).join('')}
+                    </div>
+                `;
+
+                document.getElementById('personality-badge').textContent = `You're a ${beach.personality}`;
+
+                result.classList.remove('hidden');
+                result.classList.add('visible');
+
+                launchConfetti();
+            }, 500);
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            answers = {};
+
+            const result = document.getElementById('result-screen');
+            const intro = document.getElementById('intro-screen');
+
+            result.classList.remove('visible');
+            result.classList.add('exit');
+
+            setTimeout(() => {
+                result.classList.add('hidden');
+                result.classList.remove('exit');
+                intro.classList.remove('hidden', 'exit');
+            }, 500);
+        }
+
+        function launchConfetti() {
+            const canvas = document.getElementById('confetti');
+            const ctx = canvas.getContext('2d');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const pieces = [];
+            const colors = ['#E85D4C', '#C9A227', '#7FB5A8', '#2D5A6B', '#F5F1E8'];
+
+            for (let i = 0; i < 100; i++) {
+                pieces.push({
+                    x: canvas.width / 2,
+                    y: canvas.height / 2,
+                    size: Math.random() * 8 + 4,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    vx: (Math.random() - 0.5) * 15,
+                    vy: (Math.random() - 0.5) * 15 - 5,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10
+                });
+            }
+
+            let frame = 0;
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                pieces.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.vy += 0.3;
+                    p.rotation += p.rotationSpeed;
+
+                    ctx.save();
+                    ctx.translate(p.x, p.y);
+                    ctx.rotate(p.rotation * Math.PI / 180);
+                    ctx.fillStyle = p.color;
+                    ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    ctx.restore();
+                });
+
+                frame++;
+                if (frame < 120) {
+                    requestAnimationFrame(animate);
+                } else {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                }
+            }
+
+            animate();
+        }
+
+        window.addEventListener('resize', () => {
+            const canvas = document.getElementById('confetti');
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
