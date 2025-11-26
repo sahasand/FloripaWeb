@@ -20,6 +20,11 @@ A static web project with interactive tools to help visitors discover Florianóp
 │   ├── beaches.js          # Beach data + quiz questions + matching logic
 │   ├── neighborhoods.js    # Neighborhood data + quiz questions + matching logic
 │   └── gems.js             # Hidden gems data + category colors
+├── images/
+│   ├── og-home.png         # OG preview for landing page
+│   ├── og-beach.png        # OG preview for beach quiz
+│   ├── og-stay.png         # OG preview for neighborhood quiz
+│   └── og-gems.png         # OG preview for hidden gems
 ├── beach.md                # Source data for beaches
 ├── stay.md                 # Source data for neighborhoods
 └── hiddengems.md           # Source data for hidden gems
@@ -89,9 +94,23 @@ Vintage nautical map aesthetic with:
 - Parchment texture with compass rose decoration
 - Confetti celebration on result reveal
 
+## SEO & Social Sharing
+
+Each page has:
+- `<meta name="description">` for Google search results
+- Open Graph tags (`og:title`, `og:description`, `og:image`) for social previews
+- Twitter Card tags for Twitter/X previews
+- OG images are 1200×630px PNGs in `/images/`
+
+## Deployment
+
+- Hosted on GitHub Pages: https://sahasand.github.io/FloripaWeb/
+- Push to `main` branch auto-deploys
+- No build step required
+
 ## Development
 
-No build process. Edit files directly and refresh browser.
+Edit files directly and refresh browser.
 - Shared CSS in `css/style.css`
 - Page-specific styles in `<style>` blocks within HTML
 - Data and logic in separate JS files for maintainability
