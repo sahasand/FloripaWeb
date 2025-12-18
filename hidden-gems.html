@@ -1,119 +1,471 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hidden Gems · Florianópolis</title>
-    <meta name="description" content="Unlock 27 secrets only locals know. Hidden beaches, magic restaurant passwords, rare experiences, and insider tips for Florianópolis.">
+    <title data-i18n="title" data-i18n-en="Hidden Gems · Florianópolis" data-i18n-pt="Segredos da Ilha · Florianópolis">Segredos da Ilha · Florianópolis</title>
+    <meta name="description" content="Unlock 27 secrets only locals know. Hidden beaches, magic restaurant passwords, rare experiences, and insider tips for Florianópolis." data-i18n="meta-description" data-i18n-pt="Desvende 27 segredos que só os locais conhecem. Praias escondidas, senhas mágicas de restaurantes, experiências raras e dicas de quem mora em Florianópolis.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Hidden Gems · Florianópolis">
-    <meta property="og:description" content="27 secrets only locals know. Unlock hidden beaches, magic passwords, and rare experiences.">
+    <meta property="og:title" content="Hidden Gems · Florianópolis" data-i18n="og-title" data-i18n-pt="Segredos da Ilha - Florianópolis">
+    <meta property="og:description" content="27 secrets only locals know. Unlock hidden beaches, magic passwords, and rare experiences." data-i18n="og-description" data-i18n-pt="27 segredos que só os locais conhecem. Descubra praias escondidas, senhas mágicas e experiências únicas.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sahasand.github.io/FloripaWeb/hidden-gems.html">
     <meta property="og:image" content="https://sahasand.github.io/FloripaWeb/images/og-gems.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Hidden Gems · Florianópolis">
-    <meta name="twitter:description" content="27 secrets only locals know. Unlock hidden beaches, magic passwords, and rare experiences.">
+    <meta name="twitter:title" content="Hidden Gems · Florianópolis" data-i18n="twitter-title" data-i18n-pt="Segredos da Ilha - Florianópolis">
+    <meta name="twitter:description" content="27 secrets only locals know. Unlock hidden beaches, magic passwords, and rare experiences." data-i18n="twitter-description" data-i18n-pt="27 segredos que só os locais conhecem. Descubra praias escondidas, senhas mágicas e experiências únicas.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <style>
-        /* Hidden Gems specific styles */
+        /* ═══════════════════════════════════════════════════════════════
+           TREASURE CHEST — "Sunken Pirate's Bounty"
+           A mystical, weathered chest with floating particles & light rays
+           ═══════════════════════════════════════════════════════════════ */
+
+        .treasure-chest-wrapper {
+            position: relative;
+            width: 220px;
+            height: 200px;
+            margin: 40px auto 20px;
+        }
+
+        /* Floating gold particles container */
+        .chest-particles {
+            position: absolute;
+            inset: -40px;
+            pointer-events: none;
+            overflow: visible;
+        }
+
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: radial-gradient(circle, var(--gold) 0%, rgba(201, 162, 39, 0) 70%);
+            border-radius: 50%;
+            opacity: 0;
+            animation: particleFloat 4s ease-in-out infinite;
+        }
+
+        .particle:nth-child(1) { left: 10%; bottom: 20%; animation-delay: 0s; }
+        .particle:nth-child(2) { left: 25%; bottom: 30%; animation-delay: 0.5s; width: 4px; height: 4px; }
+        .particle:nth-child(3) { left: 75%; bottom: 25%; animation-delay: 1s; }
+        .particle:nth-child(4) { left: 85%; bottom: 35%; animation-delay: 1.5s; width: 5px; height: 5px; }
+        .particle:nth-child(5) { left: 50%; bottom: 15%; animation-delay: 2s; width: 4px; height: 4px; }
+        .particle:nth-child(6) { left: 35%; bottom: 40%; animation-delay: 2.5s; }
+        .particle:nth-child(7) { left: 65%; bottom: 20%; animation-delay: 3s; width: 3px; height: 3px; }
+        .particle:nth-child(8) { left: 20%; bottom: 45%; animation-delay: 3.5s; width: 5px; height: 5px; }
+
+        @keyframes particleFloat {
+            0%, 100% {
+                opacity: 0;
+                transform: translateY(0) scale(0.5);
+            }
+            20% {
+                opacity: 0.8;
+            }
+            80% {
+                opacity: 0.6;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-80px) scale(1);
+            }
+        }
+
+        .treasure-chest-wrapper:hover .particle {
+            animation-duration: 2.5s;
+        }
+
+        /* Main chest container */
         .treasure-chest {
-            width: 150px;
-            height: 120px;
-            margin: 30px auto;
+            width: 180px;
+            height: 150px;
+            margin: 0 auto;
             position: relative;
             cursor: pointer;
-            transition: transform 0.3s ease;
+            perspective: 800px;
+            transform-style: preserve-3d;
+            animation: chestFloat 4s ease-in-out infinite;
+            filter: drop-shadow(0 20px 30px rgba(0, 0, 0, 0.4));
+        }
+
+        @keyframes chestFloat {
+            0%, 100% { transform: translateY(0) rotateX(5deg); }
+            50% { transform: translateY(-12px) rotateX(5deg); }
         }
 
         .treasure-chest:hover {
-            transform: scale(1.05);
+            animation: chestHover 0.3s ease forwards;
         }
 
+        @keyframes chestHover {
+            to {
+                transform: translateY(-8px) rotateX(8deg) scale(1.05);
+                filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.5));
+            }
+        }
+
+        /* Chest base - the main body */
         .chest-base {
             position: absolute;
             bottom: 0;
+            left: 10px;
+            right: 10px;
+            height: 85px;
+            background:
+                /* Wood grain texture */
+                repeating-linear-gradient(
+                    90deg,
+                    transparent 0px,
+                    rgba(0, 0, 0, 0.03) 2px,
+                    transparent 4px,
+                    rgba(139, 90, 43, 0.1) 8px
+                ),
+                /* Main wood gradient */
+                linear-gradient(180deg,
+                    #8B5A2B 0%,
+                    #6B4423 40%,
+                    #5D3A1A 70%,
+                    #4A2D15 100%
+                );
+            border-radius: 6px 6px 10px 10px;
+            box-shadow:
+                inset 0 2px 4px rgba(255, 255, 255, 0.1),
+                inset 0 -15px 30px rgba(0, 0, 0, 0.4),
+                0 4px 8px rgba(0, 0, 0, 0.3);
+            border: 2px solid #3D2814;
+        }
+
+        /* Metal bands on base */
+        .chest-base::before,
+        .chest-base::after {
+            content: '';
+            position: absolute;
             left: 0;
             right: 0;
-            height: 70px;
-            background: linear-gradient(180deg, #8B5A2B 0%, #654321 100%);
-            border-radius: 8px 8px 12px 12px;
-            border: 3px solid #4A3520;
-            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.3);
+            height: 8px;
+            background: linear-gradient(180deg,
+                #A08050 0%,
+                #786040 50%,
+                #5A4530 100%
+            );
+            border-top: 1px solid #C0A070;
+            border-bottom: 1px solid #3A2A1A;
         }
 
         .chest-base::before {
-            content: '';
+            top: 8px;
+        }
+
+        .chest-base::after {
+            bottom: 8px;
+        }
+
+        /* Lock plate */
+        .chest-lock {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 30px;
-            height: 25px;
-            background: var(--gold);
-            border-radius: 4px;
-            border: 2px solid #B8860B;
+            width: 44px;
+            height: 36px;
+            background: linear-gradient(145deg,
+                #D4AF37 0%,
+                #C9A227 30%,
+                #B8960F 60%,
+                #9A7B00 100%
+            );
+            border-radius: 6px;
+            border: 2px solid #8B7500;
+            box-shadow:
+                inset 0 2px 4px rgba(255, 255, 255, 0.4),
+                inset 0 -2px 4px rgba(0, 0, 0, 0.3),
+                0 4px 12px rgba(0, 0, 0, 0.4);
+            z-index: 10;
         }
 
+        /* Keyhole */
+        .chest-lock::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, #1A1A1A 40%, #2A2A2A 100%);
+            border-radius: 50%;
+            box-shadow:
+                inset 0 2px 4px rgba(0, 0, 0, 0.8),
+                0 0 10px rgba(201, 162, 39, 0.5);
+            animation: keyholeGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes keyholeGlow {
+            0%, 100% { box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 10px rgba(201, 162, 39, 0.3); }
+            50% { box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.8), 0 0 20px rgba(201, 162, 39, 0.8); }
+        }
+
+        /* Keyhole slot */
+        .chest-lock::after {
+            content: '';
+            position: absolute;
+            top: 18px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 6px;
+            height: 10px;
+            background: #1A1A1A;
+            border-radius: 0 0 3px 3px;
+        }
+
+        /* Corner brackets */
+        .chest-corner {
+            position: absolute;
+            width: 20px;
+            height: 25px;
+            background: linear-gradient(135deg, #A08050 0%, #6B5030 100%);
+            border: 1px solid #4A3520;
+            z-index: 5;
+        }
+
+        .chest-corner--tl { top: -2px; left: -2px; border-radius: 4px 0 8px 0; }
+        .chest-corner--tr { top: -2px; right: -2px; border-radius: 0 4px 0 8px; }
+        .chest-corner--bl { bottom: -2px; left: -2px; border-radius: 0 8px 0 4px; }
+        .chest-corner--br { bottom: -2px; right: -2px; border-radius: 8px 0 4px 0; }
+
+        /* Lid container for 3D effect */
+        .chest-lid-wrapper {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 80px;
+            transform-style: preserve-3d;
+            transform-origin: bottom center;
+            transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .treasure-chest.opening .chest-lid-wrapper {
+            transform: rotateX(-120deg);
+        }
+
+        /* Lid top surface */
         .chest-lid {
             position: absolute;
             top: 0;
-            left: -5px;
-            right: -5px;
-            height: 60px;
-            background: linear-gradient(180deg, #A0522D 0%, #8B5A2B 100%);
-            border-radius: 12px 12px 0 0;
-            border: 3px solid #4A3520;
-            transform-origin: bottom;
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            left: 0;
+            right: 0;
+            height: 70px;
+            background:
+                /* Wood grain */
+                repeating-linear-gradient(
+                    85deg,
+                    transparent 0px,
+                    rgba(0, 0, 0, 0.02) 2px,
+                    transparent 5px,
+                    rgba(160, 82, 45, 0.08) 10px
+                ),
+                /* Curved lid gradient */
+                radial-gradient(ellipse 120% 80% at 50% 100%,
+                    #6B4423 0%,
+                    #8B5A2B 40%,
+                    #A0522D 70%,
+                    #8B5A2B 100%
+                );
+            border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+            border: 2px solid #3D2814;
+            border-bottom: none;
+            box-shadow:
+                inset 0 10px 20px rgba(255, 255, 255, 0.1),
+                inset 0 -5px 15px rgba(0, 0, 0, 0.2),
+                0 -2px 10px rgba(0, 0, 0, 0.2);
+            transform: translateZ(0);
+            backface-visibility: hidden;
         }
 
+        /* Lid metal band */
+        .chest-lid::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 10px;
+            background: linear-gradient(180deg,
+                #B09060 0%,
+                #8B7050 50%,
+                #6B5540 100%
+            );
+            border-top: 1px solid #D0B080;
+            border-bottom: 1px solid #4A3A2A;
+            transform: translateY(-50%);
+        }
+
+        /* Lid clasp that connects to lock */
         .chest-lid::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -8px;
             left: 50%;
             transform: translateX(-50%);
-            width: 20px;
-            height: 15px;
-            background: var(--gold);
-            border-radius: 0 0 4px 4px;
-            border: 2px solid #B8860B;
+            width: 28px;
+            height: 16px;
+            background: linear-gradient(180deg,
+                #D4AF37 0%,
+                #B8960F 100%
+            );
+            border-radius: 4px 4px 6px 6px;
+            border: 2px solid #8B7500;
             border-top: none;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+            z-index: 15;
         }
 
-        .treasure-chest.opening .chest-lid {
-            transform: rotateX(-110deg);
+        /* Lid thickness (front edge) */
+        .chest-lid-edge {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: linear-gradient(180deg, #5D3A1A 0%, #4A2D15 100%);
+            border: 2px solid #3D2814;
+            border-top: none;
+            border-radius: 0 0 3px 3px;
+            transform: rotateX(-90deg) translateY(-6px);
+            transform-origin: top;
         }
 
+        /* Interior glow when opening */
         .chest-glow {
             position: absolute;
-            top: 30%;
+            top: 40%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80px;
-            height: 40px;
-            background: radial-gradient(ellipse, rgba(201, 162, 39, 0.8) 0%, transparent 70%);
+            width: 160px;
+            height: 100px;
+            background: radial-gradient(ellipse,
+                rgba(255, 215, 0, 0.95) 0%,
+                rgba(255, 180, 0, 0.6) 30%,
+                rgba(255, 140, 0, 0.3) 50%,
+                transparent 70%
+            );
             opacity: 0;
-            transition: opacity 0.5s ease 0.3s;
-            filter: blur(10px);
+            filter: blur(20px);
+            transition: opacity 0.4s ease;
+            pointer-events: none;
         }
 
         .treasure-chest.opening .chest-glow {
             opacity: 1;
-            animation: pulse 1s ease-in-out infinite;
+            animation: glowBurst 1.5s ease-out forwards;
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.8; }
-            50% { transform: translate(-50%, -50%) scale(1.3); opacity: 1; }
+        @keyframes glowBurst {
+            0% {
+                transform: translate(-50%, -50%) scale(0.5);
+                opacity: 0;
+            }
+            30% {
+                transform: translate(-50%, -50%) scale(1.2);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1);
+                opacity: 0.8;
+            }
         }
+
+        /* Light rays emanating from open chest */
+        .chest-rays {
+            position: absolute;
+            top: 20%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 200px;
+            height: 200px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .treasure-chest.opening .chest-rays {
+            animation: raysAppear 0.8s ease-out 0.3s forwards;
+        }
+
+        @keyframes raysAppear {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0.3); }
+            100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .ray {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 4px;
+            height: 80px;
+            background: linear-gradient(to top,
+                rgba(255, 215, 0, 0.8) 0%,
+                rgba(255, 255, 200, 0.4) 50%,
+                transparent 100%
+            );
+            transform-origin: bottom center;
+            border-radius: 2px;
+            filter: blur(2px);
+        }
+
+        .ray:nth-child(1) { transform: translateX(-50%) rotate(-60deg); }
+        .ray:nth-child(2) { transform: translateX(-50%) rotate(-40deg); }
+        .ray:nth-child(3) { transform: translateX(-50%) rotate(-20deg); }
+        .ray:nth-child(4) { transform: translateX(-50%) rotate(0deg); }
+        .ray:nth-child(5) { transform: translateX(-50%) rotate(20deg); }
+        .ray:nth-child(6) { transform: translateX(-50%) rotate(40deg); }
+        .ray:nth-child(7) { transform: translateX(-50%) rotate(60deg); }
+
+        /* Sparkle burst on open */
+        .chest-sparkles {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 120px;
+            height: 120px;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .treasure-chest.opening .chest-sparkles {
+            animation: sparklesBurst 1s ease-out 0.2s forwards;
+        }
+
+        @keyframes sparklesBurst {
+            0% { opacity: 0; transform: translate(-50%, -50%) scale(0); }
+            50% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+            100% { opacity: 0; transform: translate(-50%, -50%) scale(1.5); }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: var(--gold);
+            clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+        }
+
+        .sparkle:nth-child(1) { top: 10%; left: 50%; }
+        .sparkle:nth-child(2) { top: 25%; left: 15%; }
+        .sparkle:nth-child(3) { top: 25%; left: 85%; }
+        .sparkle:nth-child(4) { top: 50%; left: 5%; }
+        .sparkle:nth-child(5) { top: 50%; left: 95%; }
+        .sparkle:nth-child(6) { top: 75%; left: 20%; }
+        .sparkle:nth-child(7) { top: 75%; left: 80%; }
+        .sparkle:nth-child(8) { top: 90%; left: 50%; }
 
         .reveal-text {
             font-family: 'Playfair Display', serif;
@@ -324,17 +676,46 @@
                 grid-template-columns: 1fr;
             }
 
+            .treasure-chest-wrapper {
+                width: 180px;
+                height: 170px;
+                margin: 30px auto 15px;
+            }
+
             .treasure-chest {
-                width: 120px;
-                height: 100px;
+                width: 150px;
+                height: 130px;
             }
 
             .chest-base {
-                height: 55px;
+                height: 72px;
+            }
+
+            .chest-lid-wrapper {
+                height: 68px;
             }
 
             .chest-lid {
-                height: 50px;
+                height: 60px;
+            }
+
+            .chest-lock {
+                width: 36px;
+                height: 30px;
+            }
+
+            .chest-corner {
+                width: 16px;
+                height: 20px;
+            }
+
+            .chest-rays {
+                width: 160px;
+                height: 160px;
+            }
+
+            .ray {
+                height: 60px;
             }
 
             .action-buttons {
@@ -354,55 +735,399 @@
 
     <div class="container">
         <div class="map-scroll">
-            <a href="index.html" class="home-link">Floripa</a>
+            <a href="index.html" class="home-link">Vamos Floripa</a>
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn active" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+            </div>
             <div class="compass"></div>
 
             <!-- Intro Screen -->
             <div id="intro-screen" class="screen intro-screen">
-                <div class="intro-icon">🗝️</div>
-                <h1>Hidden Gems</h1>
-                <p class="subtitle">Secrets of the Island</p>
-                <p class="intro-text">
-                    Beyond the guidebooks lie 27 treasures only locals know—secret beaches, hidden viewpoints,
-                    restaurants with magic passwords, and experiences you won't find anywhere else.
+                <div class="intro-icon"><img src="images/fancy_icon_3.png" alt="Key" class="page-icon"></div>
+                <h1 data-i18n="main-title" data-i18n-en="Hidden Gems" data-i18n-pt="Segredos da Ilha">Segredos da Ilha</h1>
+                <p class="subtitle" data-i18n="subtitle" data-i18n-en="Secrets of the Island" data-i18n-pt="Os Tesouros Escondidos">Os Tesouros Escondidos</p>
+                <p class="intro-text" data-i18n="intro-text" data-i18n-en="Beyond the guidebooks lie 27 treasures only locals know—secret beaches, hidden viewpoints, restaurants with magic passwords, and experiences you won't find anywhere else." data-i18n-pt="Além dos guias turísticos existem 27 tesouros que só os locais conhecem—praias secretas, mirantes escondidos, restaurantes com senhas mágicas e experiências que você não vai encontrar em nenhum outro lugar.">
+                    Além dos guias turísticos existem 27 tesouros que só os locais conhecem—praias secretas, mirantes escondidos,
+                    restaurantes com senhas mágicas e experiências que você não vai encontrar em nenhum outro lugar.
                 </p>
 
-                <div class="treasure-chest" onclick="revealGem()">
-                    <div class="chest-glow"></div>
-                    <div class="chest-lid"></div>
-                    <div class="chest-base"></div>
+                <div class="treasure-chest-wrapper">
+                    <!-- Floating particles -->
+                    <div class="chest-particles">
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                        <div class="particle"></div>
+                    </div>
+
+                    <div class="treasure-chest" onclick="revealGem()">
+                        <!-- Light rays (appear on open) -->
+                        <div class="chest-rays">
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                            <div class="ray"></div>
+                        </div>
+
+                        <!-- Sparkles (burst on open) -->
+                        <div class="chest-sparkles">
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                            <div class="sparkle"></div>
+                        </div>
+
+                        <!-- Interior glow -->
+                        <div class="chest-glow"></div>
+
+                        <!-- Lid with 3D wrapper -->
+                        <div class="chest-lid-wrapper">
+                            <div class="chest-lid"></div>
+                            <div class="chest-lid-edge"></div>
+                        </div>
+
+                        <!-- Base with lock and corners -->
+                        <div class="chest-base">
+                            <div class="chest-lock"></div>
+                            <div class="chest-corner chest-corner--tl"></div>
+                            <div class="chest-corner chest-corner--tr"></div>
+                            <div class="chest-corner chest-corner--bl"></div>
+                            <div class="chest-corner chest-corner--br"></div>
+                        </div>
+                    </div>
                 </div>
-                <p class="reveal-text">Tap the chest to discover a secret</p>
-                <p class="gems-counter">27 gems waiting to be discovered</p>
+                <p class="reveal-text" data-i18n="reveal-text" data-i18n-en="Tap the chest to discover a secret" data-i18n-pt="Toque no baú para descobrir um segredo">Toque no baú para descobrir um segredo</p>
+                <p class="gems-counter" data-i18n="gems-counter" data-i18n-en="27 gems waiting to be discovered" data-i18n-pt="27 segredos esperando ser descobertos">27 segredos esperando ser descobertos</p>
             </div>
 
             <!-- Result Screen -->
             <div id="result-screen" class="screen result-screen">
-                <div class="discovery-label">YOU DISCOVERED</div>
+                <div class="discovery-label" data-i18n="discovery-label" data-i18n-en="YOU DISCOVERED" data-i18n-pt="VOCÊ DESCOBRIU">VOCÊ DESCOBRIU</div>
 
                 <div id="gem-card" class="gem-card">
                     <!-- Gem details loaded dynamically -->
                 </div>
 
                 <div class="result-actions">
-                    <button class="restart-btn" style="background: var(--coral); color: var(--foam); border-color: var(--coral);" onclick="revealGem()">
-                        Reveal Another Gem
+                    <button class="restart-btn" style="background: var(--coral); color: var(--foam); border-color: var(--coral);" onclick="revealGem()" data-i18n="reveal-another" data-i18n-en="Reveal Another Gem" data-i18n-pt="Revelar Outro Segredo">
+                        Revelar Outro Segredo
                     </button>
-                    <a href="find-your-beach.html" class="restart-btn">
-                        Find Your Beach →
+                    <a href="find-your-beach.html" class="restart-btn" data-i18n="find-beach-link" data-i18n-en="Find Your Beach →" data-i18n-pt="Encontre Sua Praia →">
+                        Encontre Sua Praia →
                     </a>
-                    <a href="where-to-stay.html" class="restart-btn">
-                        Where to Stay →
+                    <a href="where-to-stay.html" class="restart-btn" data-i18n="where-stay-link" data-i18n-en="Where to Stay →" data-i18n-pt="Onde Ficar →">
+                        Onde Ficar →
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           SINGLE-SCREEN INTRO — Viewport-constrained with animations
+           ═══════════════════════════════════════════════════════════════ */
+
+        .lang-switch {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        .compass { display: none; }
+
+        .lang-btn {
+            background: rgba(45, 90, 107, 0.25);
+            border: 1px solid rgba(45, 90, 107, 0.4);
+            color: var(--ocean-deep);
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover { background: rgba(45, 90, 107, 0.4); }
+        .lang-btn.active { background: var(--coral); border-color: var(--coral); color: var(--foam); }
+
+        /* Intro screen - viewport constrained */
+        #intro-screen.intro-screen {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        /* Icon with animation */
+        .intro-icon {
+            margin-bottom: 10px;
+            line-height: 0;
+            animation: fadeSlideDown 0.7s ease-out forwards;
+        }
+
+        .page-icon {
+            width: clamp(70px, 12vh, 110px);
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+        }
+
+        @keyframes fadeSlideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Title animations */
+        #intro-screen h1 {
+            font-size: clamp(1.8rem, 5vh, 2.8rem);
+            margin-bottom: 5px;
+            animation: fadeSlideUp 0.6s ease-out 0.15s both;
+        }
+
+        #intro-screen h1::after {
+            width: 60px;
+            height: 2px;
+            margin: 8px auto;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #intro-screen .subtitle {
+            font-size: clamp(0.85rem, 1.8vh, 1rem);
+            margin-bottom: clamp(8px, 2vh, 15px);
+            animation: fadeSlideUp 0.6s ease-out 0.25s both;
+        }
+
+        #intro-screen .intro-text {
+            font-size: clamp(0.85rem, 1.6vh, 0.95rem);
+            line-height: 1.6;
+            margin-bottom: clamp(10px, 2vh, 20px);
+            max-width: 420px;
+            animation: fadeSlideUp 0.6s ease-out 0.35s both;
+        }
+
+        /* Treasure chest wrapper animation */
+        .treasure-chest-wrapper {
+            animation: fadeSlideUp 0.6s ease-out 0.45s both;
+        }
+
+        /* Reveal text and counter animations */
+        .reveal-text {
+            animation: fadeSlideUp 0.6s ease-out 0.55s both;
+        }
+
+        .gems-counter {
+            animation: fadeSlideUp 0.6s ease-out 0.65s both;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            #intro-screen.intro-screen {
+                min-height: calc(100vh - 100px);
+                padding: 10px 0;
+            }
+
+            .page-icon {
+                width: clamp(60px, 10vh, 90px);
+            }
+
+            #intro-screen .intro-text {
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Short screens */
+        @media (max-height: 700px) {
+            .page-icon {
+                width: clamp(50px, 8vh, 80px);
+            }
+
+            #intro-screen .intro-text {
+                display: none;
+            }
+
+            .treasure-chest-wrapper {
+                margin: 20px auto 10px;
+            }
+        }
+    </style>
+
     <script src="js/gems.js"></script>
     <script>
+        let currentLang = 'pt';
+        let currentGem = null; // Track current displayed gem for re-render
+
+        // Bilingual labels for dynamic content
+        const i18n = {
+            en: {
+                theSecret: "THE SECRET",
+                effort: "EFFORT",
+                bestTime: "BEST TIME",
+                season: "SEASON",
+                details: "DETAILS",
+                headsUp: "HEADS UP",
+                // Category translations
+                "Secret Beach": "SECRET BEACH",
+                "Epic Viewpoint": "EPIC VIEWPOINT",
+                "Hidden Eat": "HIDDEN EAT",
+                "Rare Experience": "RARE EXPERIENCE",
+                "Insider Secret": "INSIDER SECRET"
+            },
+            pt: {
+                theSecret: "O SEGREDO",
+                effort: "ESFORÇO",
+                bestTime: "MELHOR HORÁRIO",
+                season: "TEMPORADA",
+                details: "DETALHES",
+                headsUp: "ATENÇÃO",
+                // Category translations
+                "Secret Beach": "PRAIA SECRETA",
+                "Epic Viewpoint": "MIRANTE ÉPICO",
+                "Hidden Eat": "COMIDA ESCONDIDA",
+                "Rare Experience": "EXPERIÊNCIA RARA",
+                "Insider Secret": "SEGREDO LOCAL"
+            }
+        };
+
+        // Get translated label
+        function t(key) {
+            return i18n[currentLang][key] || i18n.en[key] || key;
+        }
+
+        // Translate category name
+        function translateCategory(category) {
+            return i18n[currentLang][category] || i18n.en[category] || category.toUpperCase();
+        }
+
+        // Helper to get localized value from bilingual data
+        function getLocalizedValue(value) {
+            if (typeof value === 'object' && value !== null && (value.en || value.pt)) {
+                return value[currentLang] || value.en;
+            }
+            return value;
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update static i18n elements
+            document.querySelectorAll('[data-i18n-en]').forEach(el => {
+                const text = lang === 'pt' ? el.dataset.i18nPt : el.dataset.i18nEn;
+                if (text) el.textContent = text;
+            });
+
+            // Re-render current gem if visible
+            if (currentGem && !document.getElementById('result-screen').classList.contains('hidden')) {
+                renderGem(currentGem);
+            }
+
+            localStorage.setItem('floripa-lang', lang);
+        }
+
         let isFirstReveal = true;
         let revealedCount = 0;
+
+        // Render a gem card (extracted for re-use on language switch)
+        function renderGem(gem) {
+            const gemCard = document.getElementById('gem-card');
+
+            // Get category key for lookup (always use English key for i18n dictionary)
+            const categoryKey = typeof gem.category === 'object' ? gem.category.en : gem.category;
+            const categoryStyle = categoryColors[categoryKey] || { bg: "rgba(255,255,255,0.1)", border: "#fff" };
+
+            const nickname = getLocalizedValue(gem.nickname);
+            const description = getLocalizedValue(gem.description);
+            const theSecret = getLocalizedValue(gem.theSecret);
+            const effort = getLocalizedValue(gem.effort);
+            const effortDetail = getLocalizedValue(gem.effortDetail);
+            const bestTime = getLocalizedValue(gem.bestTime);
+            const season = getLocalizedValue(gem.season);
+            const seasonBadge = getLocalizedValue(gem.seasonBadge);
+            const warning = getLocalizedValue(gem.warning);
+
+            gemCard.innerHTML = `
+                <div class="gem-header">
+                    <span class="gem-emoji">${gem.emoji}</span>
+                    <div class="gem-meta">
+                        <span class="gem-category" style="background: ${categoryStyle.bg}; color: ${categoryStyle.border};">
+                            ${translateCategory(categoryKey)}
+                        </span>
+                        ${seasonBadge ? `<span class="season-badge">${seasonBadge}</span>` : ''}
+                        <div class="gem-name">${gem.name}</div>
+                        <div class="gem-nickname">"${nickname}"</div>
+                    </div>
+                </div>
+
+                <p class="gem-description">${description}</p>
+
+                <div class="gem-secret">
+                    <div class="gem-secret-label">🔑 ${t('theSecret')}</div>
+                    <div class="gem-secret-text">${theSecret}</div>
+                </div>
+
+                <div class="gem-details">
+                    <div class="gem-detail">
+                        <div class="gem-detail-label">${t('effort')}</div>
+                        <div class="gem-detail-value">${effort}</div>
+                    </div>
+                    <div class="gem-detail">
+                        <div class="gem-detail-label">${t('bestTime')}</div>
+                        <div class="gem-detail-value">${bestTime}</div>
+                    </div>
+                    <div class="gem-detail">
+                        <div class="gem-detail-label">${t('season')}</div>
+                        <div class="gem-detail-value">${season}</div>
+                    </div>
+                    <div class="gem-detail">
+                        <div class="gem-detail-label">${t('details')}</div>
+                        <div class="gem-detail-value" style="font-size: 0.8rem;">${effortDetail}</div>
+                    </div>
+                </div>
+
+                ${warning ? `
+                <div class="gem-warning">
+                    <div class="gem-warning-label">⚠️ ${t('headsUp')}</div>
+                    <div class="gem-warning-text">${warning}</div>
+                </div>
+                ` : ''}
+
+                <div class="gem-tags">
+                    ${gem.tags.map(tag => `<span class="gem-tag">#${tag}</span>`).join('')}
+                </div>
+            `;
+        }
 
         function revealGem() {
             const intro = document.getElementById('intro-screen');
@@ -416,63 +1141,13 @@
             }
 
             setTimeout(() => {
-                // Get random gem
+                // Get random gem and store for re-render
                 const gem = getRandomGem();
+                currentGem = gem;
                 revealedCount++;
 
-                // Update card content
-                const categoryStyle = categoryColors[gem.category] || { bg: "rgba(255,255,255,0.1)", border: "#fff" };
-
-                gemCard.innerHTML = `
-                    <div class="gem-header">
-                        <span class="gem-emoji">${gem.emoji}</span>
-                        <div class="gem-meta">
-                            <span class="gem-category" style="background: ${categoryStyle.bg}; color: ${categoryStyle.border};">
-                                ${gem.category.toUpperCase()}
-                            </span>
-                            ${gem.seasonBadge ? `<span class="season-badge">${gem.seasonBadge}</span>` : ''}
-                            <div class="gem-name">${gem.name}</div>
-                            <div class="gem-nickname">"${gem.nickname}"</div>
-                        </div>
-                    </div>
-
-                    <p class="gem-description">${gem.description}</p>
-
-                    <div class="gem-secret">
-                        <div class="gem-secret-label">🔑 THE SECRET</div>
-                        <div class="gem-secret-text">${gem.theSecret}</div>
-                    </div>
-
-                    <div class="gem-details">
-                        <div class="gem-detail">
-                            <div class="gem-detail-label">EFFORT</div>
-                            <div class="gem-detail-value">${gem.effort}</div>
-                        </div>
-                        <div class="gem-detail">
-                            <div class="gem-detail-label">BEST TIME</div>
-                            <div class="gem-detail-value">${gem.bestTime}</div>
-                        </div>
-                        <div class="gem-detail">
-                            <div class="gem-detail-label">SEASON</div>
-                            <div class="gem-detail-value">${gem.season}</div>
-                        </div>
-                        <div class="gem-detail">
-                            <div class="gem-detail-label">DETAILS</div>
-                            <div class="gem-detail-value" style="font-size: 0.8rem;">${gem.effortDetail}</div>
-                        </div>
-                    </div>
-
-                    ${gem.warning ? `
-                    <div class="gem-warning">
-                        <div class="gem-warning-label">⚠️ HEADS UP</div>
-                        <div class="gem-warning-text">${gem.warning}</div>
-                    </div>
-                    ` : ''}
-
-                    <div class="gem-tags">
-                        ${gem.tags.map(tag => `<span class="gem-tag">#${tag}</span>`).join('')}
-                    </div>
-                `;
+                // Render the gem card
+                renderGem(gem);
 
                 // Transition screens
                 if (isFirstReveal) {
@@ -564,6 +1239,14 @@
             const canvas = document.getElementById('confetti');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+        });
+
+        // Load saved language preference (default to PT)
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('floripa-lang');
+            if (saved === 'en') {
+                setLanguage('en');
+            }
         });
     </script>
 </body>

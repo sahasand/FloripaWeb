@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR" data-lang="pt">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find Your Beach · Florianópolis</title>
-    <meta name="description" content="Take a quick quiz to discover which of Florianópolis' 42 beaches matches your vibe. Surf breaks, hidden coves, family spots, and more.">
+    <title data-i18n-title='{"en":"Find Your Beach · Florianópolis","pt":"Encontre Sua Praia · Florianópolis"}'>Find Your Beach · Florianópolis</title>
+    <meta name="description" data-i18n-content='{"en":"Take a quick quiz to discover which of Florianópolis&apos; 42 beaches matches your vibe. Surf breaks, hidden coves, family spots, and more.","pt":"Faça um quiz rápido pra descobrir qual das 42 praias de Florianópolis combina com você. Picos de surf, enseadas escondidas, praias pra família e muito mais."}' content="Take a quick quiz to discover which of Florianópolis' 42 beaches matches your vibe. Surf breaks, hidden coves, family spots, and more.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Find Your Beach · Florianópolis">
-    <meta property="og:description" content="42 beaches. One quiz. Discover your perfect shore on Brazil's island paradise.">
+    <meta property="og:title" data-i18n-content='{"en":"Find Your Beach · Florianópolis","pt":"Encontre Sua Praia · Florianópolis"}' content="Find Your Beach · Florianópolis">
+    <meta property="og:description" data-i18n-content='{"en":"42 beaches. One quiz. Discover your perfect shore on Brazil&apos;s island paradise.","pt":"42 praias. Um quiz. Descubra sua praia perfeita no paraíso brasileiro."}' content="42 beaches. One quiz. Discover your perfect shore on Brazil's island paradise.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sahasand.github.io/FloripaWeb/find-your-beach.html">
     <meta property="og:image" content="https://sahasand.github.io/FloripaWeb/images/og-beach.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Find Your Beach · Florianópolis">
-    <meta name="twitter:description" content="42 beaches. One quiz. Discover your perfect shore on Brazil's island paradise.">
+    <meta name="twitter:title" data-i18n-content='{"en":"Find Your Beach · Florianópolis","pt":"Encontre Sua Praia · Florianópolis"}' content="Find Your Beach · Florianópolis">
+    <meta name="twitter:description" data-i18n-content='{"en":"42 beaches. One quiz. Discover your perfect shore on Brazil&apos;s island paradise.","pt":"42 praias. Um quiz. Descubra sua praia perfeita no paraíso brasileiro."}' content="42 beaches. One quiz. Discover your perfect shore on Brazil's island paradise.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -105,9 +105,166 @@
             font-family: 'Crimson Text', serif;
         }
 
+        /* ═══════════════════════════════════════════════════════════════
+           SINGLE-SCREEN INTRO — Viewport-constrained with animations
+           ═══════════════════════════════════════════════════════════════ */
+
+        .lang-switch {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        .compass { display: none; }
+
+        .lang-btn {
+            background: rgba(45, 90, 107, 0.25);
+            border: 1px solid rgba(45, 90, 107, 0.4);
+            color: var(--ocean-deep);
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover { background: rgba(45, 90, 107, 0.4); }
+        .lang-btn.active { background: var(--coral); border-color: var(--coral); color: var(--foam); }
+
+        /* Intro screen - viewport constrained */
+        #intro-screen.intro-screen {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Icon with animation */
+        .intro-icon {
+            margin-bottom: 12px;
+            line-height: 0;
+            animation: fadeSlideDown 0.7s ease-out forwards;
+        }
+
+        .page-icon {
+            width: clamp(80px, 15vh, 130px);
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+        }
+
+        @keyframes fadeSlideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Title animations */
+        #intro-screen h1 {
+            font-size: clamp(1.8rem, 5vh, 2.8rem);
+            margin-bottom: 5px;
+            animation: fadeSlideUp 0.6s ease-out 0.15s both;
+        }
+
+        #intro-screen h1::after {
+            width: 60px;
+            height: 2px;
+            margin: 10px auto;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #intro-screen .subtitle {
+            font-size: clamp(0.9rem, 2vh, 1.05rem);
+            margin-bottom: clamp(15px, 3vh, 25px);
+            animation: fadeSlideUp 0.6s ease-out 0.25s both;
+        }
+
+        #intro-screen .intro-text {
+            font-size: clamp(0.9rem, 1.8vh, 1rem);
+            line-height: 1.7;
+            margin-bottom: clamp(20px, 4vh, 35px);
+            max-width: 450px;
+            animation: fadeSlideUp 0.6s ease-out 0.35s both;
+        }
+
+        /* Start button with animation */
+        #intro-screen .start-btn {
+            font-size: clamp(1rem, 2vh, 1.2rem);
+            padding: clamp(14px, 2.5vh, 18px) clamp(35px, 6vw, 50px);
+            animation: fadeSlideUp 0.6s ease-out 0.45s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #intro-screen .start-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        #intro-screen .start-btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Quiz screen styling */
+        #quiz-screen h1 {
+            font-size: clamp(1.6rem, 4vh, 2.2rem);
+        }
+
+        #quiz-screen .subtitle {
+            margin-bottom: 20px;
+        }
+
+        /* Mobile responsive */
         @media (max-width: 600px) {
             .beach-fit {
                 grid-template-columns: 1fr;
+            }
+
+            #intro-screen.intro-screen {
+                min-height: calc(100vh - 100px);
+                padding: 15px 0;
+            }
+
+            .page-icon {
+                width: clamp(70px, 12vh, 100px);
+            }
+
+            #intro-screen .intro-text {
+                font-size: 0.85rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Short screens */
+        @media (max-height: 650px) {
+            .page-icon {
+                width: clamp(60px, 10vh, 90px);
+            }
+
+            #intro-screen .intro-text {
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-bottom: 15px;
+            }
+
+            #intro-screen .start-btn {
+                padding: 12px 30px;
             }
         }
     </style>
@@ -122,27 +279,31 @@
 
     <div class="container">
         <div class="map-scroll">
-            <a href="index.html" class="home-link">Floripa</a>
+            <a href="index.html" class="home-link">Vamos Floripa</a>
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn active" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+            </div>
             <div class="compass"></div>
 
             <!-- Intro Screen -->
             <div id="intro-screen" class="screen intro-screen">
-                <div class="intro-icon">🏝️</div>
-                <h1>Find Your Beach</h1>
-                <p class="subtitle">A Florianópolis Discovery</p>
-                <p class="intro-text">
+                <div class="intro-icon"><img src="images/fancy_icon_1.png" alt="Beach" class="page-icon"></div>
+                <h1 data-i18n='{"en":"Find Your Beach","pt":"Encontre Sua Praia"}'>Find Your Beach</h1>
+                <p class="subtitle" data-i18n='{"en":"A Florianópolis Discovery","pt":"Uma Descoberta em Florianópolis"}'>A Florianópolis Discovery</p>
+                <p class="intro-text" data-i18n='{"en":"The island holds 42 beaches, each with its own soul. Answer four questions and we&apos;ll chart your course to the shore that&apos;s calling your name.","pt":"A ilha tem 42 praias, cada uma com sua própria alma. Responda quatro perguntas e vamos traçar sua rota até a praia que está chamando seu nome."}'>
                     The island holds 42 beaches, each with its own soul.
                     Answer four questions and we'll chart your course to the shore that's calling your name.
                 </p>
-                <button class="start-btn" onclick="startQuiz()">
+                <button class="start-btn" onclick="startQuiz()" data-i18n='{"en":"BEGIN YOUR VOYAGE","pt":"COMECE SUA JORNADA"}'>
                     BEGIN YOUR VOYAGE
                 </button>
             </div>
 
             <!-- Quiz Screen -->
             <div id="quiz-screen" class="screen hidden">
-                <h1>Find Your Beach</h1>
-                <p class="subtitle">Chart your course</p>
+                <h1 data-i18n='{"en":"Find Your Beach","pt":"Encontre Sua Praia"}'>Find Your Beach</h1>
+                <p class="subtitle" data-i18n='{"en":"Chart your course","pt":"Trace sua rota"}'>Chart your course</p>
 
                 <div class="journey-progress">
                     <div class="journey-step" data-step="1"><span>1</span></div>
@@ -161,7 +322,7 @@
 
             <!-- Result Screen -->
             <div id="result-screen" class="screen result-screen">
-                <div class="discovery-label">YOUR DISCOVERY</div>
+                <div class="discovery-label" data-i18n='{"en":"YOUR DISCOVERY","pt":"SUA DESCOBERTA"}'>YOUR DISCOVERY</div>
                 <h2 id="beach-name" class="beach-name stamp-effect"></h2>
                 <p id="beach-nickname" class="beach-nickname"></p>
                 <p id="beach-type" class="beach-type"></p>
@@ -173,13 +334,13 @@
                 <div id="personality-badge" class="personality-badge"></div>
 
                 <div class="result-actions">
-                    <button class="restart-btn" onclick="restartQuiz()">
+                    <button class="restart-btn" onclick="restartQuiz()" data-i18n='{"en":"Discover Another Beach →","pt":"Descubra Outra Praia →"}'>
                         Discover Another Beach →
                     </button>
-                    <a href="where-to-stay.html" class="restart-btn">
+                    <a href="where-to-stay.html" class="restart-btn" data-i18n='{"en":"Find Your Neighborhood →","pt":"Encontre Seu Bairro →"}'>
                         Find Your Neighborhood →
                     </a>
-                    <a href="hidden-gems.html" class="restart-btn">
+                    <a href="hidden-gems.html" class="restart-btn" data-i18n='{"en":"Discover Hidden Gems →","pt":"Descubra Tesouros Escondidos →"}'>
                         Discover Hidden Gems →
                     </a>
                 </div>
@@ -191,6 +352,104 @@
     <script>
         let currentQuestion = 0;
         let answers = {};
+        let currentLang = 'pt';
+
+        // i18n strings for dynamic content
+        const i18n = {
+            coast: { en: 'Coast', pt: 'Costa' },
+            waves: { en: 'WAVES', pt: 'ONDAS' },
+            crowds: { en: 'CROWDS', pt: 'LOTACAO' },
+            infrastructure: { en: 'INFRASTRUCTURE', pt: 'INFRAESTRUTURA' },
+            water: { en: 'WATER', pt: 'AGUA' },
+            bestFor: { en: 'BEST FOR', pt: 'IDEAL PARA' },
+            notIdealFor: { en: 'NOT IDEAL FOR', pt: 'NAO RECOMENDADO PARA' },
+            practicalInfo: { en: 'PRACTICAL INFO', pt: 'INFO PRATICA' },
+            parking: { en: 'Parking', pt: 'Estacionamento' },
+            food: { en: 'Food', pt: 'Comida' },
+            bestTime: { en: 'Best Time', pt: 'Melhor Horario' },
+            bestSeason: { en: 'Best Season', pt: 'Melhor Epoca' },
+            proTip: { en: 'PRO TIP', pt: 'DICA DE OURO' },
+            youreA: { en: "You're a", pt: "Voce e um" }
+        };
+
+        // Helper to get localized text
+        function t(key) {
+            return i18n[key] ? i18n[key][currentLang] : key;
+        }
+
+        // Helper to get localized value from beach data
+        function getLocalizedValue(value) {
+            if (typeof value === 'object' && value !== null && (value.en || value.pt)) {
+                return value[currentLang] || value.en;
+            }
+            return value;
+        }
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.setAttribute('data-lang', lang);
+            document.documentElement.setAttribute('lang', lang);
+
+            // Update language buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update all static i18n elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                try {
+                    const translations = JSON.parse(el.dataset.i18n);
+                    el.textContent = translations[lang] || translations.en;
+                } catch (e) {
+                    console.error('Error parsing i18n data:', e);
+                }
+            });
+
+            // Update meta tags
+            document.querySelectorAll('[data-i18n-content]').forEach(el => {
+                try {
+                    const translations = JSON.parse(el.dataset.i18nContent);
+                    el.setAttribute('content', translations[lang] || translations.en);
+                } catch (e) {
+                    console.error('Error parsing i18n-content data:', e);
+                }
+            });
+
+            // Update title
+            const titleEl = document.querySelector('[data-i18n-title]');
+            if (titleEl) {
+                try {
+                    const translations = JSON.parse(titleEl.dataset.i18nTitle);
+                    document.title = translations[lang] || translations.en;
+                } catch (e) {
+                    console.error('Error parsing i18n-title data:', e);
+                }
+            }
+
+            // Re-render current question if quiz is active
+            if (!document.getElementById('quiz-screen').classList.contains('hidden') && currentQuestion < beachQuestions.length) {
+                showQuestion(currentQuestion);
+            }
+
+            // Re-render result if visible
+            if (!document.getElementById('result-screen').classList.contains('hidden')) {
+                const beach = calculateBeachMatch(answers);
+                renderBeachResult(beach);
+            }
+
+            // Store preference
+            localStorage.setItem('floripa-lang', lang);
+        }
+
+        // Load saved language preference (default to PT)
+        function loadLanguagePreference() {
+            const savedLang = localStorage.getItem('floripa-lang');
+            if (savedLang === 'en') {
+                setLanguage('en');
+            } else {
+                setLanguage('pt');
+            }
+        }
 
         function startQuiz() {
             const intro = document.getElementById('intro-screen');
@@ -217,19 +476,25 @@
             questionArea.classList.remove('visible');
 
             setTimeout(() => {
+                const label = getLocalizedValue(q.label);
+                const text = getLocalizedValue(q.text);
+
                 questionArea.innerHTML = `
-                    <div class="question-label">${q.label}</div>
-                    <div class="question-text">${q.text}</div>
+                    <div class="question-label">${label}</div>
+                    <div class="question-text">${text}</div>
                     <div class="options-grid">
-                        ${q.options.map(opt => `
+                        ${q.options.map(opt => {
+                            const title = getLocalizedValue(opt.title);
+                            const desc = getLocalizedValue(opt.desc);
+                            return `
                             <div class="option-card" onclick="selectOption('${opt.value}', this)">
                                 <div class="option-icon">${opt.icon}</div>
                                 <div class="option-content">
-                                    <div class="option-title">${opt.title}</div>
-                                    <div class="option-desc">${opt.desc}</div>
+                                    <div class="option-title">${title}</div>
+                                    <div class="option-desc">${desc}</div>
                                 </div>
                             </div>
-                        `).join('')}
+                        `}).join('')}
                     </div>
                 `;
 
@@ -273,6 +538,104 @@
             return `<span class="rating-dots">${dots}</span>`;
         }
 
+        function renderBeachResult(beach) {
+            document.getElementById('beach-name').textContent = beach.name;
+
+            const nickname = getLocalizedValue(beach.nickname);
+            document.getElementById('beach-nickname').textContent = nickname ? `"${nickname}"` : '';
+
+            document.getElementById('beach-type').textContent = getLocalizedValue(beach.type);
+
+            const beachCard = document.getElementById('beach-card');
+            beachCard.innerHTML = `
+                <div class="beach-header">
+                    <span class="beach-emoji">${beach.emoji}</span>
+                    <div>
+                        <span class="beach-region">${beach.region} ${t('coast')}</span>
+                    </div>
+                </div>
+
+                <p class="beach-description">${getLocalizedValue(beach.description)}</p>
+
+                <div class="ratings-grid">
+                    <div class="rating-item">
+                        <div class="rating-label">${t('waves')}</div>
+                        <div class="rating-value">${renderRatingDots(beach.waves)}</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">${t('crowds')}</div>
+                        <div class="rating-value">${renderRatingDots(beach.crowds)}</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">${t('infrastructure')}</div>
+                        <div class="rating-value">${renderRatingDots(beach.infrastructure)}</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">${t('water')}</div>
+                        <div class="rating-value" style="font-size: 0.8rem;">${getLocalizedValue(beach.water)}</div>
+                    </div>
+                </div>
+
+                <div class="beach-fit">
+                    <div class="fit-section best">
+                        <div class="fit-title">✓ ${t('bestFor')}</div>
+                        <div class="fit-list">${getLocalizedValue(beach.bestFor)}</div>
+                    </div>
+                    <div class="fit-section not-ideal">
+                        <div class="fit-title">✗ ${t('notIdealFor')}</div>
+                        <div class="fit-list">${getLocalizedValue(beach.notIdealFor)}</div>
+                    </div>
+                </div>
+
+                <div class="practical-section">
+                    <div class="practical-title">📍 ${t('practicalInfo')}</div>
+                    <div class="practical-grid">
+                        <div class="practical-item">
+                            <span class="practical-item-icon">🚗</span>
+                            <div class="practical-item-content">
+                                <span class="practical-item-label">${t('parking')}</span>
+                                ${getLocalizedValue(beach.parking)}
+                            </div>
+                        </div>
+                        <div class="practical-item">
+                            <span class="practical-item-icon">🍽️</span>
+                            <div class="practical-item-content">
+                                <span class="practical-item-label">${t('food')}</span>
+                                ${getLocalizedValue(beach.food)}
+                            </div>
+                        </div>
+                        <div class="practical-item">
+                            <span class="practical-item-icon">⏰</span>
+                            <div class="practical-item-content">
+                                <span class="practical-item-label">${t('bestTime')}</span>
+                                ${getLocalizedValue(beach.bestTime)}
+                            </div>
+                        </div>
+                        <div class="practical-item">
+                            <span class="practical-item-icon">📅</span>
+                            <div class="practical-item-content">
+                                <span class="practical-item-label">${t('bestSeason')}</span>
+                                ${getLocalizedValue(beach.bestSeason)}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                ${beach.proTip ? `
+                <div class="pro-tip">
+                    <div class="pro-tip-label">💡 ${t('proTip')}</div>
+                    <div class="pro-tip-text">${getLocalizedValue(beach.proTip)}</div>
+                </div>
+                ` : ''}
+
+                <div class="beach-tags">
+                    ${beach.tags.map(tag => `<span class="beach-tag">#${tag}</span>`).join('')}
+                </div>
+            `;
+
+            document.getElementById('personality-badge').textContent = `${t('youreA')} ${beach.personality}`;
+        }
+
         function showResult() {
             const quiz = document.getElementById('quiz-screen');
             const result = document.getElementById('result-screen');
@@ -283,98 +646,7 @@
             setTimeout(() => {
                 quiz.classList.add('hidden');
 
-                document.getElementById('beach-name').textContent = beach.name;
-                document.getElementById('beach-nickname').textContent = beach.nickname ? `"${beach.nickname}"` : '';
-                document.getElementById('beach-type').textContent = beach.type;
-
-                const beachCard = document.getElementById('beach-card');
-                beachCard.innerHTML = `
-                    <div class="beach-header">
-                        <span class="beach-emoji">${beach.emoji}</span>
-                        <div>
-                            <span class="beach-region">${beach.region} Coast</span>
-                        </div>
-                    </div>
-
-                    <p class="beach-description">${beach.description}</p>
-
-                    <div class="ratings-grid">
-                        <div class="rating-item">
-                            <div class="rating-label">WAVES</div>
-                            <div class="rating-value">${renderRatingDots(beach.waves)}</div>
-                        </div>
-                        <div class="rating-item">
-                            <div class="rating-label">CROWDS</div>
-                            <div class="rating-value">${renderRatingDots(beach.crowds)}</div>
-                        </div>
-                        <div class="rating-item">
-                            <div class="rating-label">INFRASTRUCTURE</div>
-                            <div class="rating-value">${renderRatingDots(beach.infrastructure)}</div>
-                        </div>
-                        <div class="rating-item">
-                            <div class="rating-label">WATER</div>
-                            <div class="rating-value" style="font-size: 0.8rem;">${beach.water}</div>
-                        </div>
-                    </div>
-
-                    <div class="beach-fit">
-                        <div class="fit-section best">
-                            <div class="fit-title">✓ BEST FOR</div>
-                            <div class="fit-list">${beach.bestFor}</div>
-                        </div>
-                        <div class="fit-section not-ideal">
-                            <div class="fit-title">✗ NOT IDEAL FOR</div>
-                            <div class="fit-list">${beach.notIdealFor}</div>
-                        </div>
-                    </div>
-
-                    <div class="practical-section">
-                        <div class="practical-title">📍 PRACTICAL INFO</div>
-                        <div class="practical-grid">
-                            <div class="practical-item">
-                                <span class="practical-item-icon">🚗</span>
-                                <div class="practical-item-content">
-                                    <span class="practical-item-label">Parking</span>
-                                    ${beach.parking}
-                                </div>
-                            </div>
-                            <div class="practical-item">
-                                <span class="practical-item-icon">🍽️</span>
-                                <div class="practical-item-content">
-                                    <span class="practical-item-label">Food</span>
-                                    ${beach.food}
-                                </div>
-                            </div>
-                            <div class="practical-item">
-                                <span class="practical-item-icon">⏰</span>
-                                <div class="practical-item-content">
-                                    <span class="practical-item-label">Best Time</span>
-                                    ${beach.bestTime}
-                                </div>
-                            </div>
-                            <div class="practical-item">
-                                <span class="practical-item-icon">📅</span>
-                                <div class="practical-item-content">
-                                    <span class="practical-item-label">Best Season</span>
-                                    ${beach.bestSeason}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    ${beach.proTip ? `
-                    <div class="pro-tip">
-                        <div class="pro-tip-label">💡 PRO TIP</div>
-                        <div class="pro-tip-text">${beach.proTip}</div>
-                    </div>
-                    ` : ''}
-
-                    <div class="beach-tags">
-                        ${beach.tags.map(tag => `<span class="beach-tag">#${tag}</span>`).join('')}
-                    </div>
-                `;
-
-                document.getElementById('personality-badge').textContent = `You're a ${beach.personality}`;
+                renderBeachResult(beach);
 
                 result.classList.remove('hidden');
                 result.classList.add('visible');
@@ -456,6 +728,9 @@
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
         });
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', loadLanguagePreference);
     </script>
 </body>
 </html>

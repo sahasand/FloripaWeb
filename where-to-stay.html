@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Where to Stay · Florianópolis</title>
-    <meta name="description" content="Find your perfect Florianópolis neighborhood. From luxury beach clubs to bohemian surf villages—match your vibe and budget.">
+    <title>Onde Ficar · Florianópolis</title>
+    <meta name="description" content="Encontre o bairro perfeito em Florianópolis. De beach clubs de luxo a vilas de surf boêmias—combine seu estilo e orçamento.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Where to Stay · Florianópolis">
-    <meta property="og:description" content="15+ neighborhoods. One quiz. Find your perfect Floripa base from beach clubs to surf villages.">
+    <meta property="og:title" content="Onde Ficar · Florianópolis">
+    <meta property="og:description" content="15+ bairros. Um quiz. Encontre sua base perfeita em Floripa, de beach clubs a vilas de surf.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sahasand.github.io/FloripaWeb/where-to-stay.html">
     <meta property="og:image" content="https://sahasand.github.io/FloripaWeb/images/og-stay.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Where to Stay · Florianópolis">
-    <meta name="twitter:description" content="15+ neighborhoods. One quiz. Find your perfect Floripa base from beach clubs to surf villages.">
+    <meta name="twitter:title" content="Onde Ficar · Florianópolis">
+    <meta name="twitter:description" content="15+ bairros. Um quiz. Encontre sua base perfeita em Floripa, de beach clubs a vilas de surf.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -32,27 +32,31 @@
 
     <div class="container">
         <div class="map-scroll">
-            <a href="index.html" class="home-link">Floripa</a>
+            <a href="index.html" class="home-link" data-i18n="home-link" data-i18n-en="Vamos Floripa" data-i18n-pt="Vamos Floripa">Vamos Floripa</a>
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn active" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+            </div>
             <div class="compass"></div>
 
             <!-- Intro Screen -->
             <div id="intro-screen" class="screen intro-screen">
-                <div class="intro-icon">🏡</div>
-                <h1>Where to Stay</h1>
-                <p class="subtitle">Find Your Floripa Base</p>
-                <p class="intro-text">
-                    From luxury beach clubs to bohemian surf villages, each neighborhood offers a different Floripa experience.
-                    Answer four questions and we'll match you with your perfect base.
+                <div class="intro-icon"><img src="images/fancy_icon_2.png" alt="House" class="page-icon"></div>
+                <h1 data-i18n="intro-title" data-i18n-en="Where to Stay" data-i18n-pt="Onde Ficar">Onde Ficar</h1>
+                <p class="subtitle" data-i18n="intro-subtitle" data-i18n-en="Find Your Floripa Base" data-i18n-pt="Encontre Sua Base em Floripa">Encontre Sua Base em Floripa</p>
+                <p class="intro-text" data-i18n="intro-text" data-i18n-en="From luxury beach clubs to bohemian surf villages, each neighborhood offers a different Floripa experience. Answer four questions and we'll match you with your perfect base." data-i18n-pt="De beach clubs de luxo a vilas de surf boêmias, cada bairro oferece uma experiência diferente de Floripa. Responda quatro perguntas e vamos encontrar sua base perfeita.">
+                    De beach clubs de luxo a vilas de surf boêmias, cada bairro oferece uma experiência diferente de Floripa.
+                    Responda quatro perguntas e vamos encontrar sua base perfeita.
                 </p>
-                <button class="start-btn" onclick="startQuiz()">
-                    FIND YOUR NEIGHBORHOOD
+                <button class="start-btn" onclick="startQuiz()" data-i18n="start-btn" data-i18n-en="FIND YOUR NEIGHBORHOOD" data-i18n-pt="ENCONTRE SEU BAIRRO">
+                    ENCONTRE SEU BAIRRO
                 </button>
             </div>
 
             <!-- Quiz Screen -->
             <div id="quiz-screen" class="screen hidden">
-                <h1>Where to Stay</h1>
-                <p class="subtitle">Chart your base</p>
+                <h1 data-i18n="quiz-title" data-i18n-en="Where to Stay" data-i18n-pt="Onde Ficar">Onde Ficar</h1>
+                <p class="subtitle" data-i18n="quiz-subtitle" data-i18n-en="Chart your base" data-i18n-pt="Escolha sua base">Escolha sua base</p>
 
                 <div class="journey-progress">
                     <div class="journey-step" data-step="1"><span>1</span></div>
@@ -71,7 +75,7 @@
 
             <!-- Result Screen -->
             <div id="result-screen" class="screen result-screen">
-                <div class="discovery-label">YOUR PERFECT BASE</div>
+                <div class="discovery-label" data-i18n="result-label" data-i18n-en="YOUR PERFECT BASE" data-i18n-pt="SUA BASE PERFEITA">SUA BASE PERFEITA</div>
                 <h2 id="result-name" class="result-name stamp-effect"></h2>
                 <p id="result-nickname" class="result-nickname"></p>
                 <p id="result-type" class="result-type"></p>
@@ -83,22 +87,244 @@
                 <div id="personality-badge" class="personality-badge"></div>
 
                 <div class="result-actions">
-                    <button class="restart-btn" onclick="restartQuiz()">
-                        Explore Other Neighborhoods →
+                    <button class="restart-btn" onclick="restartQuiz()" data-i18n="restart-btn" data-i18n-en="Explore Other Neighborhoods →" data-i18n-pt="Explorar Outros Bairros →">
+                        Explorar Outros Bairros →
                     </button>
-                    <a href="find-your-beach.html" class="restart-btn">
-                        Find Your Beach →
+                    <a href="find-your-beach.html" class="restart-btn" data-i18n="beach-link" data-i18n-en="Find Your Beach →" data-i18n-pt="Encontre Sua Praia →">
+                        Encontre Sua Praia →
                     </a>
-                    <a href="hidden-gems.html" class="restart-btn">
-                        Discover Hidden Gems →
+                    <a href="hidden-gems.html" class="restart-btn" data-i18n="gems-link" data-i18n-en="Discover Hidden Gems →" data-i18n-pt="Descubra Tesouros Escondidos →">
+                        Descubra Tesouros Escondidos →
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           SINGLE-SCREEN INTRO — Viewport-constrained with animations
+           ═══════════════════════════════════════════════════════════════ */
+
+        .lang-switch {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        .compass { display: none; }
+
+        .lang-btn {
+            background: rgba(45, 90, 107, 0.25);
+            border: 1px solid rgba(45, 90, 107, 0.4);
+            color: var(--ocean-deep);
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover { background: rgba(45, 90, 107, 0.4); }
+        .lang-btn.active { background: var(--coral); border-color: var(--coral); color: var(--foam); }
+
+        /* Intro screen - viewport constrained */
+        #intro-screen.intro-screen {
+            min-height: calc(100vh - 140px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        /* Icon with animation */
+        .intro-icon {
+            margin-bottom: 12px;
+            line-height: 0;
+            animation: fadeSlideDown 0.7s ease-out forwards;
+        }
+
+        .page-icon {
+            width: clamp(80px, 15vh, 130px);
+            height: auto;
+            display: block;
+            margin: 0 auto;
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+        }
+
+        @keyframes fadeSlideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Title animations */
+        #intro-screen h1 {
+            font-size: clamp(1.8rem, 5vh, 2.8rem);
+            margin-bottom: 5px;
+            animation: fadeSlideUp 0.6s ease-out 0.15s both;
+        }
+
+        #intro-screen h1::after {
+            width: 60px;
+            height: 2px;
+            margin: 10px auto;
+        }
+
+        @keyframes fadeSlideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #intro-screen .subtitle {
+            font-size: clamp(0.9rem, 2vh, 1.05rem);
+            margin-bottom: clamp(15px, 3vh, 25px);
+            animation: fadeSlideUp 0.6s ease-out 0.25s both;
+        }
+
+        #intro-screen .intro-text {
+            font-size: clamp(0.9rem, 1.8vh, 1rem);
+            line-height: 1.7;
+            margin-bottom: clamp(20px, 4vh, 35px);
+            max-width: 450px;
+            animation: fadeSlideUp 0.6s ease-out 0.35s both;
+        }
+
+        /* Start button with animation */
+        #intro-screen .start-btn {
+            font-size: clamp(1rem, 2vh, 1.2rem);
+            padding: clamp(14px, 2.5vh, 18px) clamp(35px, 6vw, 50px);
+            animation: fadeSlideUp 0.6s ease-out 0.45s both;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #intro-screen .start-btn::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        #intro-screen .start-btn:hover::after {
+            transform: translateX(100%);
+        }
+
+        /* Quiz screen styling */
+        #quiz-screen h1 {
+            font-size: clamp(1.6rem, 4vh, 2.2rem);
+        }
+
+        #quiz-screen .subtitle {
+            margin-bottom: 20px;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 600px) {
+            #intro-screen.intro-screen {
+                min-height: calc(100vh - 100px);
+                padding: 15px 0;
+            }
+
+            .page-icon {
+                width: clamp(70px, 12vh, 100px);
+            }
+
+            #intro-screen .intro-text {
+                font-size: 0.85rem;
+                margin-bottom: 20px;
+            }
+        }
+
+        /* Short screens */
+        @media (max-height: 650px) {
+            .page-icon {
+                width: clamp(60px, 10vh, 90px);
+            }
+
+            #intro-screen .intro-text {
+                font-size: 0.85rem;
+                line-height: 1.5;
+                margin-bottom: 15px;
+            }
+
+            #intro-screen .start-btn {
+                padding: 12px 30px;
+            }
+        }
+    </style>
+
     <script src="js/neighborhoods.js"></script>
     <script>
+        // i18n labels for dynamic content
+        const i18n = {
+            bestFor: { en: 'BEST FOR', pt: 'IDEAL PARA' },
+            notIdealFor: { en: 'NOT IDEAL FOR', pt: 'NAO RECOMENDADO PARA' },
+            accommodationPrices: { en: 'ACCOMMODATION PRICES', pt: 'PRECOS DE HOSPEDAGEM' },
+            shortTermLow: { en: 'Short-term (Low)', pt: 'Curta temporada (Baixa)' },
+            shortTermHigh: { en: 'Short-term (High)', pt: 'Curta temporada (Alta)' },
+            longTermMonthly: { en: 'Long-term Monthly', pt: 'Aluguel Mensal' },
+            coworking: { en: 'Coworking', pt: 'Coworking' },
+            nearbyBeaches: { en: 'NEARBY BEACHES', pt: 'PRAIAS PROXIMAS' },
+            proTip: { en: 'PRO TIP', pt: 'DICA DE OURO' },
+            alsoConsider: { en: 'ALSO CONSIDER', pt: 'CONSIDERE TAMBEM' },
+            youreA: { en: "You're a", pt: 'Voce e um(a)' }
+        };
+
+        // Current language (default: Portuguese)
+        let currentLang = 'pt';
+
+        // Helper to get translated label
+        function t(key) {
+            return i18n[key] ? i18n[key][currentLang] : key;
+        }
+
+        // Helper to get localized value from bilingual data
+        function getLocalizedValue(value) {
+            if (typeof value === 'object' && value !== null && (value.en || value.pt)) {
+                return value[currentLang] || value.en;
+            }
+            return value;
+        }
+
+        // Language switching
+        function setLanguage(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update static i18n elements
+            document.querySelectorAll('[data-i18n-en]').forEach(el => {
+                const text = lang === 'pt' ? el.dataset.i18nPt : el.dataset.i18nEn;
+                if (text) el.textContent = text;
+            });
+
+            // Re-render current question if quiz active
+            if (!document.getElementById('quiz-screen').classList.contains('hidden') && currentQuestion < neighborhoodQuestions.length) {
+                showQuestion(currentQuestion);
+            }
+
+            // Re-render result if visible
+            if (!document.getElementById('result-screen').classList.contains('hidden')) {
+                const match = calculateNeighborhoodMatch(answers);
+                renderResult(match.best, match.alternatives);
+            }
+
+            localStorage.setItem('floripa-lang', lang);
+        }
+
         let currentQuestion = 0;
         let answers = {};
 
@@ -127,16 +353,18 @@
             questionArea.classList.remove('visible');
 
             setTimeout(() => {
+                const label = getLocalizedValue(q.label);
+                const text = getLocalizedValue(q.text);
                 questionArea.innerHTML = `
-                    <div class="question-label">${q.label}</div>
-                    <div class="question-text">${q.text}</div>
+                    <div class="question-label">${label}</div>
+                    <div class="question-text">${text}</div>
                     <div class="options-grid">
                         ${q.options.map(opt => `
                             <div class="option-card" onclick="selectOption('${opt.value}', this)">
                                 <div class="option-icon">${opt.icon}</div>
                                 <div class="option-content">
-                                    <div class="option-title">${opt.title}</div>
-                                    <div class="option-desc">${opt.desc}</div>
+                                    <div class="option-title">${getLocalizedValue(opt.title)}</div>
+                                    <div class="option-desc">${getLocalizedValue(opt.desc)}</div>
                                 </div>
                             </div>
                         `).join('')}
@@ -186,8 +414,8 @@
                 quiz.classList.add('hidden');
 
                 document.getElementById('result-name').textContent = n.name;
-                document.getElementById('result-nickname').textContent = n.nickname ? `"${n.nickname}"` : '';
-                document.getElementById('result-type').textContent = n.type;
+                document.getElementById('result-nickname').textContent = n.nickname ? `"${getLocalizedValue(n.nickname)}"` : '';
+                document.getElementById('result-type').textContent = getLocalizedValue(n.type);
 
                 const resultCard = document.getElementById('result-card');
                 resultCard.innerHTML = `
@@ -198,45 +426,45 @@
                         </div>
                     </div>
 
-                    <p class="result-description">${n.description}</p>
+                    <p class="result-description">${getLocalizedValue(n.description)}</p>
 
                     <div class="fit-section-grid">
                         <div class="fit-section best">
-                            <div class="fit-title">✓ BEST FOR</div>
-                            <div class="fit-list">${n.bestFor}</div>
+                            <div class="fit-title" data-i18n="best-for">✓ ${t('bestFor')}</div>
+                            <div class="fit-list">${getLocalizedValue(n.bestFor)}</div>
                         </div>
                         <div class="fit-section not-ideal">
-                            <div class="fit-title">✗ NOT IDEAL FOR</div>
-                            <div class="fit-list">${n.notIdealFor}</div>
+                            <div class="fit-title" data-i18n="not-ideal-for">✗ ${t('notIdealFor')}</div>
+                            <div class="fit-list">${getLocalizedValue(n.notIdealFor)}</div>
                         </div>
                     </div>
 
                     <div class="price-section">
-                        <div class="price-title">💰 ACCOMMODATION PRICES</div>
+                        <div class="price-title" data-i18n="accommodation-prices">💰 ${t('accommodationPrices')}</div>
                         <div class="price-grid">
                             <div class="price-item">
-                                <div class="price-item-label">Short-term (Low)</div>
-                                <div class="price-item-value">${n.shortTermLow}</div>
+                                <div class="price-item-label" data-i18n="short-term-low">${t('shortTermLow')}</div>
+                                <div class="price-item-value">${getLocalizedValue(n.shortTermLow)}</div>
                             </div>
                             <div class="price-item">
-                                <div class="price-item-label">Short-term (High)</div>
-                                <div class="price-item-value">${n.shortTermHigh}</div>
+                                <div class="price-item-label" data-i18n="short-term-high">${t('shortTermHigh')}</div>
+                                <div class="price-item-value">${getLocalizedValue(n.shortTermHigh)}</div>
                             </div>
                             <div class="price-item">
-                                <div class="price-item-label">Long-term Monthly</div>
-                                <div class="price-item-value">${n.longTerm}</div>
+                                <div class="price-item-label" data-i18n="long-term-monthly">${t('longTermMonthly')}</div>
+                                <div class="price-item-value">${getLocalizedValue(n.longTerm)}</div>
                             </div>
                             ${n.coworking ? `
                             <div class="price-item">
-                                <div class="price-item-label">Coworking</div>
-                                <div class="price-item-value" style="font-size: 0.8rem;">${n.coworking}</div>
+                                <div class="price-item-label" data-i18n="coworking">${t('coworking')}</div>
+                                <div class="price-item-value" style="font-size: 0.8rem;">${getLocalizedValue(n.coworking)}</div>
                             </div>
                             ` : ''}
                         </div>
                     </div>
 
                     <div class="beaches-section">
-                        <div class="beaches-title">🏖️ NEARBY BEACHES</div>
+                        <div class="beaches-title" data-i18n="nearby-beaches">🏖️ ${t('nearbyBeaches')}</div>
                         <div class="beaches-list">
                             ${n.nearbyBeaches.map(b => `<span class="beach-pill">${b}</span>`).join('')}
                         </div>
@@ -244,18 +472,18 @@
 
                     ${n.proTip ? `
                     <div class="pro-tip">
-                        <div class="pro-tip-label">💡 PRO TIP</div>
-                        <div class="pro-tip-text">${n.proTip}</div>
+                        <div class="pro-tip-label" data-i18n="pro-tip">💡 ${t('proTip')}</div>
+                        <div class="pro-tip-text">${getLocalizedValue(n.proTip)}</div>
                     </div>
                     ` : ''}
 
                     <div class="alternatives-section">
-                        <div class="alternatives-title">ALSO CONSIDER</div>
+                        <div class="alternatives-title" data-i18n="also-consider">${t('alsoConsider')}</div>
                         <div class="alternatives-grid">
                             ${match.alternatives.map(alt => `
                                 <div class="alternative-card" onclick="showAlternative('${alt.name}')">
                                     <div class="alternative-name">${alt.emoji} ${alt.name}</div>
-                                    <div class="alternative-type">${alt.type}</div>
+                                    <div class="alternative-type">${getLocalizedValue(alt.type)}</div>
                                 </div>
                             `).join('')}
                         </div>
@@ -266,7 +494,7 @@
                     </div>
                 `;
 
-                document.getElementById('personality-badge').textContent = `You're a ${n.personality}`;
+                document.getElementById('personality-badge').textContent = `${t('youreA')} ${n.personality}`;
 
                 result.classList.remove('hidden');
                 result.classList.add('visible');
@@ -280,8 +508,8 @@
             if (!n) return;
 
             document.getElementById('result-name').textContent = n.name;
-            document.getElementById('result-nickname').textContent = n.nickname ? `"${n.nickname}"` : '';
-            document.getElementById('result-type').textContent = n.type;
+            document.getElementById('result-nickname').textContent = n.nickname ? `"${getLocalizedValue(n.nickname)}"` : '';
+            document.getElementById('result-type').textContent = getLocalizedValue(n.type);
 
             const resultCard = document.getElementById('result-card');
             resultCard.innerHTML = `
@@ -292,45 +520,45 @@
                     </div>
                 </div>
 
-                <p class="result-description">${n.description}</p>
+                <p class="result-description">${getLocalizedValue(n.description)}</p>
 
                 <div class="fit-section-grid">
                     <div class="fit-section best">
-                        <div class="fit-title">✓ BEST FOR</div>
-                        <div class="fit-list">${n.bestFor}</div>
+                        <div class="fit-title" data-i18n="best-for">✓ ${t('bestFor')}</div>
+                        <div class="fit-list">${getLocalizedValue(n.bestFor)}</div>
                     </div>
                     <div class="fit-section not-ideal">
-                        <div class="fit-title">✗ NOT IDEAL FOR</div>
-                        <div class="fit-list">${n.notIdealFor}</div>
+                        <div class="fit-title" data-i18n="not-ideal-for">✗ ${t('notIdealFor')}</div>
+                        <div class="fit-list">${getLocalizedValue(n.notIdealFor)}</div>
                     </div>
                 </div>
 
                 <div class="price-section">
-                    <div class="price-title">💰 ACCOMMODATION PRICES</div>
+                    <div class="price-title" data-i18n="accommodation-prices">💰 ${t('accommodationPrices')}</div>
                     <div class="price-grid">
                         <div class="price-item">
-                            <div class="price-item-label">Short-term (Low)</div>
-                            <div class="price-item-value">${n.shortTermLow}</div>
+                            <div class="price-item-label" data-i18n="short-term-low">${t('shortTermLow')}</div>
+                            <div class="price-item-value">${getLocalizedValue(n.shortTermLow)}</div>
                         </div>
                         <div class="price-item">
-                            <div class="price-item-label">Short-term (High)</div>
-                            <div class="price-item-value">${n.shortTermHigh}</div>
+                            <div class="price-item-label" data-i18n="short-term-high">${t('shortTermHigh')}</div>
+                            <div class="price-item-value">${getLocalizedValue(n.shortTermHigh)}</div>
                         </div>
                         <div class="price-item">
-                            <div class="price-item-label">Long-term Monthly</div>
-                            <div class="price-item-value">${n.longTerm}</div>
+                            <div class="price-item-label" data-i18n="long-term-monthly">${t('longTermMonthly')}</div>
+                            <div class="price-item-value">${getLocalizedValue(n.longTerm)}</div>
                         </div>
                         ${n.coworking ? `
                         <div class="price-item">
-                            <div class="price-item-label">Coworking</div>
-                            <div class="price-item-value" style="font-size: 0.8rem;">${n.coworking}</div>
+                            <div class="price-item-label" data-i18n="coworking">${t('coworking')}</div>
+                            <div class="price-item-value" style="font-size: 0.8rem;">${getLocalizedValue(n.coworking)}</div>
                         </div>
                         ` : ''}
                     </div>
                 </div>
 
                 <div class="beaches-section">
-                    <div class="beaches-title">🏖️ NEARBY BEACHES</div>
+                    <div class="beaches-title" data-i18n="nearby-beaches">🏖️ ${t('nearbyBeaches')}</div>
                     <div class="beaches-list">
                         ${n.nearbyBeaches.map(b => `<span class="beach-pill">${b}</span>`).join('')}
                     </div>
@@ -338,8 +566,8 @@
 
                 ${n.proTip ? `
                 <div class="pro-tip">
-                    <div class="pro-tip-label">💡 PRO TIP</div>
-                    <div class="pro-tip-text">${n.proTip}</div>
+                    <div class="pro-tip-label" data-i18n="pro-tip">💡 ${t('proTip')}</div>
+                    <div class="pro-tip-text">${getLocalizedValue(n.proTip)}</div>
                 </div>
                 ` : ''}
 
@@ -348,7 +576,7 @@
                 </div>
             `;
 
-            document.getElementById('personality-badge').textContent = `You're a ${n.personality}`;
+            document.getElementById('personality-badge').textContent = `${t('youreA')} ${n.personality}`;
         }
 
         function restartQuiz() {
@@ -423,6 +651,14 @@
             const canvas = document.getElementById('confetti');
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
+        });
+
+        // Load saved language preference (default to PT)
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('floripa-lang');
+            if (saved === 'en') {
+                setLanguage('en');
+            }
         });
     </script>
 </body>

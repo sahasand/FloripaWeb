@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(ls:*)",
+      "Skill(frontend-design:frontend-design)",
+      "Bash(start \"\" \"C:\\\\Users\\\\SandeepSaha\\\\OneDrive - Cardiovascular Clinical Science Foundation\\\\Documents\\\\floripa wbt cl2\\\\hidden-gems.html\")",
+      "Bash(start \"\" \"C:\\\\Users\\\\SandeepSaha\\\\OneDrive - Cardiovascular Clinical Science Foundation\\\\Documents\\\\floripa wbt cl2\\\\index.html\")"
+    ]
+  }
+}

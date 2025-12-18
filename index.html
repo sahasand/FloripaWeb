@@ -1,22 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Discover Florianópolis · Your Island Guide</title>
-    <meta name="description" content="Find your perfect Florianópolis experience. Interactive tools to discover beaches, neighborhoods, and hidden gems on Brazil's magical island.">
+    <title data-i18n-en="Vamos Floripa · Your Island Guide" data-i18n-pt="Vamos Floripa · Seu Guia da Ilha">Vamos Floripa · Seu Guia da Ilha</title>
+    <meta name="description" content="Find your perfect Florianópolis experience. Interactive tools to discover beaches, neighborhoods, and hidden gems on Brazil's magical island." data-i18n-en="Find your perfect Florianópolis experience. Interactive tools to discover beaches, neighborhoods, and hidden gems on Brazil's magical island." data-i18n-pt="Encontre sua experiência perfeita em Florianópolis. Ferramentas interativas pra descobrir praias, bairros e segredos da ilha mágica do Brasil.">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Discover Florianópolis">
-    <meta property="og:description" content="42 beaches. 15+ neighborhoods. 27 hidden gems. Find your perfect Floripa experience.">
+    <meta property="og:title" content="Vamos Floripa" data-i18n-en="Vamos Floripa" data-i18n-pt="Vamos Floripa">
+    <meta property="og:description" content="42 beaches. 15+ neighborhoods. 27 hidden gems. Find your perfect Floripa experience." data-i18n-en="42 beaches. 15+ neighborhoods. 27 hidden gems. Find your perfect Floripa experience." data-i18n-pt="42 praias. 15+ bairros. 27 segredos locais. Encontre sua experiência perfeita em Floripa.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://sahasand.github.io/FloripaWeb/">
     <meta property="og:image" content="https://sahasand.github.io/FloripaWeb/images/og-home.png">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Discover Florianópolis">
-    <meta name="twitter:description" content="42 beaches. 15+ neighborhoods. 27 hidden gems. Find your perfect Floripa experience.">
+    <meta name="twitter:title" content="Vamos Floripa" data-i18n-en="Vamos Floripa" data-i18n-pt="Vamos Floripa">
+    <meta name="twitter:description" content="42 beaches. 15+ neighborhoods. 27 hidden gems. Find your perfect Floripa experience." data-i18n-en="42 beaches. 15+ neighborhoods. 27 hidden gems. Find your perfect Floripa experience." data-i18n-pt="42 praias. 15+ bairros. 27 segredos locais. Encontre sua experiência perfeita em Floripa.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital@0;1&family=Bebas+Neue&display=swap" rel="stylesheet">
@@ -31,48 +31,458 @@
 
     <div class="container">
         <div class="map-scroll">
-            <div class="compass"></div>
+            <div class="lang-switch">
+                <button class="lang-btn" data-lang="en" onclick="setLanguage('en')">EN</button>
+                <button class="lang-btn active" data-lang="pt" onclick="setLanguage('pt')">PT</button>
+            </div>
 
             <div class="intro-screen">
-                <div class="intro-icon">🌴</div>
-                <h1>Discover Floripa</h1>
-                <p class="subtitle">Your Island Guide Awaits</p>
-                <p class="intro-text">
-                    42 beaches. 15+ neighborhoods. One magical island.
-                    Let us help you find your perfect Florianópolis experience.
+                <div class="intro-icon">
+                    <img src="images/title1.png" alt="Tropical Island" class="hero-island">
+                </div>
+                <h1 data-i18n-en="Vamos Floripa" data-i18n-pt="Vamos Floripa">Vamos Floripa</h1>
+                <p class="subtitle" data-i18n-en="Your Island Guide Awaits" data-i18n-pt="Seu Guia da Ilha Te Espera">Seu Guia da Ilha Te Espera</p>
+                <p class="intro-text" data-i18n-en="42 beaches. 15+ neighborhoods. One magical island. Let us help you find your perfect Florianópolis experience." data-i18n-pt="42 praias. 15+ bairros. Uma ilha mágica. Deixa a gente te ajudar a encontrar sua experiência perfeita em Floripa.">
+                    42 praias. 15+ bairros. Uma ilha mágica.
+                    Deixa a gente te ajudar a encontrar sua experiência perfeita em Floripa.
                 </p>
 
                 <div class="landing-cards">
                     <a href="find-your-beach.html" class="landing-card">
-                        <div class="landing-card-icon">🏖️</div>
-                        <div class="landing-card-title">Find Your Beach</div>
-                        <div class="landing-card-desc">
-                            From legendary surf breaks to hidden coves, discover which of Floripa's 42 beaches matches your soul.
+                        <div class="landing-card-icon"><img src="images/fancy_icon_1.png" alt="Beach" class="card-icon"></div>
+                        <div class="landing-card-title" data-i18n-en="Find Your Beach" data-i18n-pt="Encontre Sua Praia">Encontre Sua Praia</div>
+                        <div class="landing-card-desc" data-i18n-en="From legendary surf breaks to hidden coves, discover which of Floripa's 42 beaches matches your soul." data-i18n-pt="De ondas lendárias a enseadas escondidas, descubra qual das 42 praias de Floripa combina com você.">
+                            De ondas lendárias a enseadas escondidas, descubra qual das 42 praias de Floripa combina com você.
                         </div>
                     </a>
 
                     <a href="where-to-stay.html" class="landing-card">
-                        <div class="landing-card-icon">🏡</div>
-                        <div class="landing-card-title">Where to Stay</div>
-                        <div class="landing-card-desc">
-                            Luxury beach clubs or bohemian surf villages? Find the neighborhood that fits your vibe and budget.
+                        <div class="landing-card-icon"><img src="images/fancy_icon_2.png" alt="House" class="card-icon"></div>
+                        <div class="landing-card-title" data-i18n-en="Where to Stay" data-i18n-pt="Onde Ficar">Onde Ficar</div>
+                        <div class="landing-card-desc" data-i18n-en="Luxury beach clubs or bohemian surf villages? Find the neighborhood that fits your vibe and budget." data-i18n-pt="Beach clubs de luxo ou vilas de surf descontraídas? Encontre o bairro que combina com seu estilo e orçamento.">
+                            Beach clubs de luxo ou vilas de surf descontraídas? Encontre o bairro que combina com seu estilo e orçamento.
                         </div>
                     </a>
 
                     <a href="hidden-gems.html" class="landing-card">
-                        <div class="landing-card-icon">🗝️</div>
-                        <div class="landing-card-title">Hidden Gems</div>
-                        <div class="landing-card-desc">
-                            Unlock 27 secrets only locals know—hidden beaches, magic passwords, and experiences beyond the guidebooks.
+                        <div class="landing-card-icon"><img src="images/fancy_icon_3.png" alt="Key" class="card-icon"></div>
+                        <div class="landing-card-title" data-i18n-en="Hidden Gems" data-i18n-pt="Segredos da Ilha">Segredos da Ilha</div>
+                        <div class="landing-card-desc" data-i18n-en="Unlock 27 secrets only locals know—hidden beaches, magic passwords, and experiences beyond the guidebooks." data-i18n-pt="Desvende 27 segredos que só os locais conhecem—praias escondidas, senhas mágicas e experiências fora dos guias turísticos.">
+                            Desvende 27 segredos que só os locais conhecem—praias escondidas, senhas mágicas e experiências fora dos guias turísticos.
                         </div>
                     </a>
                 </div>
 
                 <div class="landing-footer">
-                    <p>Brazil's safest major city · #1 digital nomad destination</p>
+                    <p data-i18n-en="Brazil's safest major city · #1 digital nomad destination" data-i18n-pt="A cidade grande mais segura do Brasil · Destino #1 pra nômades digitais">A cidade grande mais segura do Brasil · Destino #1 pra nômades digitais</p>
                 </div>
             </div>
         </div>
     </div>
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════════
+           HOME PAGE — Single-Screen Nautical Portal
+           Viewport-constrained, no-scroll landing experience
+           ═══════════════════════════════════════════════════════════════ */
+
+        /* Override container for full viewport */
+        body {
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        .container {
+            min-height: 100vh;
+            max-height: 100vh;
+            padding: 15px;
+        }
+
+        .map-scroll {
+            max-height: calc(100vh - 30px);
+            height: calc(100vh - 30px);
+            padding: 25px 30px 20px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        /* Remove the default border */
+        .map-scroll::before {
+            top: 10px;
+            left: 10px;
+            right: 10px;
+            bottom: 10px;
+            border-width: 1px;
+            opacity: 0.25;
+        }
+
+        /* Language switch */
+        .lang-switch {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            gap: 4px;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: rgba(45, 90, 107, 0.25);
+            border: 1px solid rgba(45, 90, 107, 0.4);
+            color: var(--ocean-deep);
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 0.75rem;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn:hover {
+            background: rgba(45, 90, 107, 0.4);
+        }
+
+        .lang-btn.active {
+            background: var(--coral);
+            border-color: var(--coral);
+            color: var(--foam);
+        }
+
+        /* Intro screen - flex container */
+        .intro-screen {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            gap: 0;
+        }
+
+        /* Hero island - compact */
+        .intro-icon {
+            margin-bottom: 8px;
+            animation: fadeSlideDown 0.8s ease-out forwards;
+        }
+
+        .intro-icon::before {
+            width: 200px;
+            height: 120px;
+        }
+
+        .hero-island {
+            width: clamp(120px, 18vh, 180px);
+            filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.12));
+        }
+
+        @keyframes fadeSlideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Title - tighter */
+        .intro-screen h1 {
+            font-size: clamp(2rem, 5vh, 3rem);
+            margin-bottom: 2px;
+            animation: fadeSlideUp 0.6s ease-out 0.2s both;
+        }
+
+        .intro-screen h1::after {
+            width: 60px;
+            height: 2px;
+            margin: 8px auto;
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Subtitle */
+        .intro-screen .subtitle {
+            font-size: clamp(0.85rem, 1.8vh, 1rem);
+            margin-bottom: clamp(8px, 2vh, 16px);
+            animation: fadeSlideUp 0.6s ease-out 0.3s both;
+        }
+
+        /* Intro text - condensed */
+        .intro-screen .intro-text {
+            font-size: clamp(0.85rem, 1.6vh, 0.95rem);
+            line-height: 1.6;
+            margin-bottom: clamp(12px, 2.5vh, 20px);
+            max-width: 480px;
+            animation: fadeSlideUp 0.6s ease-out 0.4s both;
+        }
+
+        /* Landing cards - horizontal layout */
+        .landing-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(10px, 1.5vw, 18px);
+            margin-top: 0;
+            width: 100%;
+            max-width: 800px;
+            animation: fadeSlideUp 0.6s ease-out 0.5s both;
+        }
+
+        .landing-card {
+            padding: clamp(12px, 2vh, 18px) clamp(10px, 1.5vw, 16px);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .landing-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 0%, rgba(201, 162, 39, 0.15) 0%, transparent 60%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .landing-card:hover::before {
+            opacity: 1;
+        }
+
+        .landing-card:hover {
+            transform: translateY(-6px) scale(1.02);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+            border-color: var(--gold);
+        }
+
+        /* Staggered card animations */
+        .landing-card:nth-child(1) { animation: cardReveal 0.5s ease-out 0.6s both; }
+        .landing-card:nth-child(2) { animation: cardReveal 0.5s ease-out 0.7s both; }
+        .landing-card:nth-child(3) { animation: cardReveal 0.5s ease-out 0.8s both; }
+
+        @keyframes cardReveal {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Card icons - smaller */
+        .landing-card-icon {
+            margin-bottom: 6px;
+            line-height: 0;
+        }
+
+        .card-icon {
+            width: clamp(50px, 8vh, 80px);
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .landing-card:hover .card-icon {
+            transform: scale(1.12) rotate(5deg);
+        }
+
+        /* Card title */
+        .landing-card-title {
+            font-size: clamp(0.9rem, 1.8vh, 1.2rem);
+            margin-top: 0;
+            margin-bottom: 4px;
+            letter-spacing: 0.1em;
+        }
+
+        /* Card description - condensed */
+        .landing-card-desc {
+            font-size: clamp(0.7rem, 1.3vh, 0.85rem);
+            line-height: 1.45;
+            opacity: 0.85;
+        }
+
+        /* Footer - compact */
+        .landing-footer {
+            margin-top: clamp(10px, 2vh, 20px);
+            animation: fadeSlideUp 0.6s ease-out 0.9s both;
+        }
+
+        .landing-footer p {
+            font-size: clamp(0.7rem, 1.2vh, 0.8rem);
+            opacity: 0.7;
+            letter-spacing: 0.02em;
+        }
+
+        /* ═══════════════════════════════════════════════════════════════
+           MOBILE RESPONSIVE — Stack cards vertically on small screens
+           ═══════════════════════════════════════════════════════════════ */
+
+        @media (max-width: 700px) {
+            .container {
+                padding: 10px;
+            }
+
+            .map-scroll {
+                max-height: calc(100vh - 20px);
+                height: calc(100vh - 20px);
+                padding: 20px 15px 15px;
+            }
+
+            .landing-cards {
+                grid-template-columns: 1fr;
+                gap: 8px;
+                max-width: 100%;
+            }
+
+            .landing-card {
+                flex-direction: row;
+                text-align: left;
+                padding: 10px 14px;
+                gap: 12px;
+            }
+
+            .landing-card-icon {
+                margin-bottom: 0;
+                flex-shrink: 0;
+            }
+
+            .card-icon {
+                width: 45px;
+            }
+
+            .landing-card-content {
+                flex: 1;
+                min-width: 0;
+            }
+
+            .landing-card-title {
+                font-size: 1rem;
+                margin-bottom: 2px;
+            }
+
+            .landing-card-desc {
+                font-size: 0.75rem;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                -webkit-box-orient: vertical;
+                overflow: hidden;
+            }
+
+            .hero-island {
+                width: clamp(100px, 15vh, 140px);
+            }
+
+            .intro-screen h1 {
+                font-size: clamp(1.8rem, 5vh, 2.5rem);
+            }
+
+            .intro-screen .intro-text {
+                font-size: 0.8rem;
+                margin-bottom: 10px;
+            }
+
+            .landing-footer {
+                margin-top: 8px;
+            }
+        }
+
+        /* Very short screens (landscape mobile) */
+        @media (max-height: 600px) {
+            .hero-island {
+                width: clamp(80px, 12vh, 120px);
+            }
+
+            .intro-screen h1::after {
+                margin: 5px auto;
+            }
+
+            .intro-screen .intro-text {
+                display: none;
+            }
+
+            .landing-card-desc {
+                display: none;
+            }
+
+            .landing-card {
+                padding: 10px 12px;
+            }
+
+            .landing-footer {
+                display: none;
+            }
+        }
+
+        /* Tall screens - more generous spacing */
+        @media (min-height: 800px) {
+            .intro-icon {
+                margin-bottom: 15px;
+            }
+
+            .intro-screen .subtitle {
+                margin-bottom: 20px;
+            }
+
+            .intro-screen .intro-text {
+                margin-bottom: 25px;
+            }
+
+            .landing-cards {
+                gap: 20px;
+            }
+
+            .landing-card {
+                padding: 20px;
+            }
+        }
+    </style>
+
+    <script>
+        function setLanguage(lang) {
+            document.documentElement.lang = lang === 'pt' ? 'pt-BR' : 'en';
+
+            // Update buttons
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Update all i18n elements
+            document.querySelectorAll('[data-i18n-en]').forEach(el => {
+                const text = lang === 'pt' ? el.dataset.i18nPt : el.dataset.i18nEn;
+                if (el.tagName === 'META') {
+                    el.setAttribute('content', text);
+                } else if (el.tagName === 'TITLE') {
+                    document.title = text;
+                } else {
+                    el.textContent = text;
+                }
+            });
+
+            localStorage.setItem('floripa-lang', lang);
+        }
+
+        // Load saved preference or default to PT
+        document.addEventListener('DOMContentLoaded', () => {
+            const saved = localStorage.getItem('floripa-lang');
+            if (saved === 'en') {
+                setLanguage('en');
+            }
+        });
+    </script>
 </body>
 </html>
