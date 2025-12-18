@@ -183,8 +183,9 @@ Each page has:
 
 ## Deployment
 
-- Currently on GitHub Pages: https://sahasand.github.io/FloripaWeb/
-- Planned custom domain: vamosfloripa.com
+- **Live at**: https://vamosfloripa.com
+- **Hosted on**: GitHub Pages (via CNAME)
+- **Repository**: https://github.com/sahasand/FloripaWeb
 - Push to `main` branch auto-deploys
 - No build step required
 
