@@ -1,0 +1,7 @@
+# Vamos Floripa - vamosfloripa.com
+# Florianópolis beach, neighborhood & hidden gems discovery
+
+User-agent: *
+Allow: /
+
+Sitemap: https://vamosfloripa.com/sitemap.xml

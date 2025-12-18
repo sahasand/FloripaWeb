@@ -175,11 +175,30 @@ Detailed CSS-drawn pirate chest with elaborate animations:
 
 ## SEO & Social Sharing
 
-Each page has:
-- `<meta name="description">` for Google search results
-- Open Graph tags (`og:title`, `og:description`, `og:image`) for social previews
+### Technical SEO
+- **Sitemap**: `sitemap.xml` with all 4 pages
+- **Robots**: `robots.txt` allowing all crawlers
+- **Canonical URLs**: `<link rel="canonical">` on all pages
+- **Hreflang**: `<link rel="alternate" hreflang="pt-BR|en|x-default">` for bilingual support
+- **Schema.org**: JSON-LD structured data (Organization + WebPage types)
+
+### Meta Tags (all bilingual)
+- `<meta name="description">` with Portuguese keywords
+- Open Graph tags (`og:title`, `og:description`, `og:image`)
 - Twitter Card tags for Twitter/X previews
 - OG images are 1200×630px PNGs in `/images/`
+
+### Target Keywords (Portuguese)
+- "praias floripa" / "praias florianópolis"
+- "onde ficar em floripa" / "onde ficar florianópolis"
+- "segredos floripa" / "dicas locais florianópolis"
+
+### Google Search Console
+To monitor SEO performance:
+1. Go to [search.google.com/search-console](https://search.google.com/search-console)
+2. Add property: `https://vamosfloripa.com`
+3. Verify via DNS TXT record (Squarespace)
+4. Submit sitemap: `https://vamosfloripa.com/sitemap.xml`
 
 ## Deployment
 
